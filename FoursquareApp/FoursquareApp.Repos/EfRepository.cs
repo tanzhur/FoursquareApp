@@ -1,54 +1,102 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FoursquareApp.Repos
+﻿namespace FoursquareApp.Repos
 {
+    using System;
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Linq.Expressions;
+
     public class EfRepository<T> : IRepository<T> where T : class
     {
+        public EfRepository(DbContext context)
+        {
+            if (context == null)
+            {
+                throw new ArgumentException("An instance of DbContext is required to use this repository.", "context");
+            }
+
+            ////SERIALIZE WILL FAIL WITH PROXIED ENTITIES
+            //context.Configuration.ProxyCreationEnabled = false;
+
+            ////ENABLING COULD CAUSE ENDLESS LOOPS AND PERFORMANCE PROBLEMS
+            //context.Configuration.LazyLoadingEnabled = false;
+
+            this.Context = context;
+            this.DbSet = this.Context.Set<T>();
+        }
+
+        protected IDbSet<T> DbSet { get; set; }
+
+        protected DbContext Context { get; set; }
+
         public T Add(T item)
         {
-            // TODO: Implement this method
-            throw new NotImplementedException();
+            this.DbSet.Add(item);
+            this.Context.SaveChanges();
+            return item;
         }
 
         public T Update(int id, T item)
         {
-            // TODO: Implement this method
-            throw new NotImplementedException();
+            this.Context.Entry<T>(item).CurrentValues.SetValues(item);
+            this.Context.SaveChanges();
+            return item;
         }
 
         public bool Delete(int id)
         {
-            // TODO: Implement this method
-            throw new NotImplementedException();
+            T item = this.DbSet.Find(id);
+
+            if (item != null)
+            {
+                this.DbSet.Remove(item);
+                this.Context.SaveChanges();
+
+                return true;
+            }
+
+            return false;
         }
 
         public bool Delete(T item)
         {
-            // TODO: Implement this method
-            throw new NotImplementedException();
+            T result = this.DbSet.Find(item);
+
+            if (result != null)
+            {
+                this.DbSet.Remove(result);
+                this.Context.SaveChanges();
+
+                return true;
+            }
+
+            return false;
         }
 
         public T Get(int id)
         {
-            // TODO: Implement this method
-            throw new NotImplementedException();
+            return this.DbSet.Find(id);
         }
 
         public IQueryable<T> All(string[] includes = null)
         {
-            // TODO: Implement this method
-            throw new NotImplementedException();
+            //HANDLE INCLUDES FOR ASSOCIATED OBJECTS IF APPLICABLE
+            if (includes != null && includes.Length > 0)
+            {
+                var query = this.DbSet.Include(includes.First());
+                foreach (var include in includes.Skip(1))
+                {
+                    query = query.Include(include);
+                }
+
+                return query.AsQueryable();
+            }
+
+            return this.DbSet.AsQueryable();
         }
 
         public IQueryable<T> Find(Expression<Func<T, int, bool>> predicate)
         {
-            // TODO: Implement this method
-            throw new NotImplementedException();
+            return this.DbSet.Where(predicate);
         }
     }
 }
