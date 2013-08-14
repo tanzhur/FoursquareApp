@@ -56,7 +56,7 @@ namespace FoursquareApp.Api.Controllers
                 return this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Username or password is invalid");
             }
 
-            User foundedUser = userRepo.All().Where(u => u.Username == inputUser.Username);
+            User foundedUser = userRepo.All().Where(u => u.Username == inputUser.Username).FirstOrDefault();
 
             if (foundedUser != null)
             {
