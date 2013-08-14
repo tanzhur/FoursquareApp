@@ -24,7 +24,7 @@ namespace FoursquareApp.Api.Controllers
             this.placesRepo = inputPlacesRepo;
         }
 
-        [HttpGet]
+        [HttpPost]
         [ActionName("create")]
         public HttpResponseMessage CreateComment(string sessionKey, [FromBody]CommentRegisterModel inputComment)
         {
