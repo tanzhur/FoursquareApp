@@ -73,7 +73,7 @@ namespace FoursquareApp.Api.Controllers
 
             foreach (Comment currentComment in allComments)
             {
-                resultComments.Add(new CommentFlatModel(currentComment);
+                resultComments.Add(new CommentFlatModel(currentComment));
             }
             
             return resultComments;
