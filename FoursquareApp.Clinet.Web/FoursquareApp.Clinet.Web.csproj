@@ -57,12 +57,26 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="index.html" />
+    <Content Include="packages.config" />
+    <None Include="scripts\libs\jquery-2.0.3.intellisense.js" />
+    <Content Include="scripts\http-requester.js" />
+    <Content Include="scripts\libs\class.js" />
+    <Content Include="scripts\libs\jquery-2.0.3.js" />
+    <Content Include="scripts\libs\jquery-2.0.3.min.js" />
+    <Content Include="scripts\persister.js" />
+    <Content Include="styles\bootstrap-responsive.css" />
+    <Content Include="styles\bootstrap-responsive.min.css" />
+    <Content Include="styles\bootstrap.css" />
+    <Content Include="styles\bootstrap.min.css" />
+    <Content Include="styles\main-style.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="scripts\libs\jquery-2.0.3.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
