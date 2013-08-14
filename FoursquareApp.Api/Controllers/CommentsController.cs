@@ -69,14 +69,14 @@ namespace FoursquareApp.Api.Controllers
         {
             var allComments = commentsRepo.All();
 
-            ICollection<CommentFlatModel> resultComments;
+            ICollection<CommentFlatModel> resultComments = new List<CommentFlatModel>();
 
             foreach (Comment currentComment in allComments)
             {
                 resultComments.Add(new CommentFlatModel(currentComment));
             }
             
-            return resultComments;
+            return this.Request.CreateResponse(HttpStatusCode.OK, resultComments);
         }
     }
 }
