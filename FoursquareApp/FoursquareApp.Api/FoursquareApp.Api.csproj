@@ -160,7 +160,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PlacesController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -287,6 +290,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FoursquareApp.Models\FoursquareApp.Models.csproj">
+      <Project>{df0c27ef-ef30-4b8a-b0d1-7be13be1150c}</Project>
+      <Name>FoursquareApp.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FoursquareApp.Repos\FoursquareApp.Repos.csproj">
+      <Project>{d94282b9-d1a7-431c-bdd0-a66cf2d77047}</Project>
+      <Name>FoursquareApp.Repos</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
