@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using FoursquareApp.Models;
+using System.Runtime.Serialization;
 
 namespace FoursquareApp.Api.Models
 {
+    [DataContract]
     public class UserModel
     {
+        [DataMember]
         public int Id { get; set; }
 
+        [DataMember]
         public string Username { get; set; }
 
+        [DataMember]
         public string Password { get; set; }
 
         public UserModel(User user)
@@ -44,21 +49,33 @@ namespace FoursquareApp.Api.Models
         }
     }
 
+    [DataContract]
     public class UserRegisterModel //: UserModel
     {
+        [DataMember]
         public string Username { get; set; }
+
+        [DataMember]
         public string AuthCode { get; set; }
     }
 
+    [DataContract]
     public class UserLoginModel
     {
+        [DataMember]
         public string Username { get; set; }
+
+        [DataMember]
         public string AuthCode { get; set; }
     }
 
+    [DataContract]
     public class UserLoggedModel
     {
+        [DataMember]
         public string UserName { get; set; }
+
+        [DataMember]
         public string SessionKey { get; set; }
     }
 }
