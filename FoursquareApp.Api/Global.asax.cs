@@ -7,6 +7,9 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using FoursquareApp.Api.Resolvers;
+using System.Data.Entity;
+using FoursquareApp.Data;
+using FoursquareApp.Data.Migrations;
 
 namespace FoursquareApp.Api
 {
@@ -17,6 +20,7 @@ namespace FoursquareApp.Api
     {
         protected void Application_Start()
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<FoursquareContext, Configuration>());
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
