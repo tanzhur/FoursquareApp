@@ -16,6 +16,8 @@ namespace FoursquareApp.Client
 
             testContext.Users.Add(new User() { Username = "MegaTest" });
             testContext.SaveChanges();
+
+            Console.WriteLine("WTF!");
         }
     }
 }
