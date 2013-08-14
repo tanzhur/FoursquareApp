@@ -135,5 +135,21 @@ namespace FoursquareApp.Api.Controllers
 
             return this.Request.CreateResponse(HttpStatusCode.OK);
         }
+
+        [HttpGet]
+        [ActionName("all")]
+        public HttpResponseMessage AllUsers()
+        {
+            var allUsers = userRepo.All();
+
+            ICollection<UserModel> resultUsers = new List<UserModel>();
+
+            foreach (User user in allUsers)
+            {
+                resultUsers.Add(new UserModel(user));
+            }
+
+            return this.Request.CreateResponse(HttpStatusCode.OK, resultUsers);
+        }
     }
 }
