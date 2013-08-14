@@ -43,4 +43,22 @@ namespace FoursquareApp.Api.Models
 
         }
     }
+
+    public class UserRegisterModel //: UserModel
+    {
+        public string Username { get; set; }
+        public string AuthCode { get; set; }
+    }
+
+    public class UserLoginModel
+    {
+        public string Username { get; set; }
+        public string AuthCode { get; set; }
+    }
+
+    public class UserLoggedModel
+    {
+        public string UserName { get; set; }
+        public string SessionKey { get; set; }
+    }
 }
