@@ -19,11 +19,15 @@ namespace FoursquareApp.Api.Models
         [DataMember]
         public string Password { get; set; }
 
+        [DataMember]
+        public string SessionKey { get; set; }
+
         public UserModel(User user)
         {
             this.Id = user.Id;
             this.Username = user.Username;
             this.Password = user.Password;
+            this.SessionKey = user.SessionKey;
         }
     }
 
