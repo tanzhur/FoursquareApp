@@ -67,7 +67,7 @@ namespace FoursquareApp.Api.Controllers
         [ActionName("get-all")]
         public HttpResponseMessage GetAllMessages()
         {
-            var allComments = commentsRepo.All();
+            var allComments = commentsRepo.All().ToList();
 
             ICollection<CommentFlatModel> resultComments = new List<CommentFlatModel>();
 

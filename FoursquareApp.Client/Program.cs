@@ -14,8 +14,16 @@ namespace FoursquareApp.Client
         {
             FoursquareContext testContext = new FoursquareContext();
 
-            testContext.Users.Add(new User() { Username = "MegaTest" });
-            testContext.SaveChanges();
+            //testContext.Users.Add(new User() { Username = "MegaTest" });
+            //testContext.SaveChanges();
+
+            foreach (var item in testContext.Users.ToList())
+            {
+                foreach (var p in item.Places)
+                {
+                    Console.WriteLine(p.Name);
+                }
+            }
 
             Console.WriteLine("WTF!");
         }
