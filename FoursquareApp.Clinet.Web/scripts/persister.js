@@ -5,90 +5,102 @@
 
 
 var persisters = (function () {
-	var nickname = localStorage.getItem("nickname");
-	var sessionKey = localStorage.getItem("sessionKey");
-	function saveUserData(userData) {
-		localStorage.setItem("nickname", userData.nickname);
-		localStorage.setItem("sessionKey", userData.sessionKey);
-		nickname = userData.nickname;
-		sessionKey = userData.sessionKey;
-	}
-	function clearUserData() {
-		localStorage.removeItem("nickname");
-		localStorage.removeItem("sessionKey");
-		nickname = "";
-		sessionKey = "";
-	}
+    var nickname = localStorage.getItem("nickname");
+    var sessionKey = localStorage.getItem("sessionKey");
+    function saveUserData(userData) {
+        localStorage.setItem("nickname", userData.nickname);
+        localStorage.setItem("sessionKey", userData.sessionKey);
+        nickname = userData.nickname;
+        sessionKey = userData.sessionKey;
+    }
+    function clearUserData() {
+        localStorage.removeItem("nickname");
+        localStorage.removeItem("sessionKey");
+        nickname = "";
+        sessionKey = "";
+    }
 
-	var MainPersister = Class.create({
-		init: function (rootUrl) {
-			this.rootUrl = rootUrl;
-			this.user = new UserPersister(this.rootUrl);
-			this.place = new PlacePersister(this.rootUrl);
-			this.comment = new CommentPersister(this.rootUrl);
-		},
-		isUserLoggedIn: function () {
-			var isLoggedIn = nickname != null && sessionKey != null;
-			return isLoggedIn;
-		},
-		nickname: function () {
-			return nickname;
-		}
-	});
-	var UserPersister = Class.create({
-		init: function (rootUrl) {
-			this.rootUrl = rootUrl + "users/";
-		},
-		login: function (user, success, error) {
-			var url = this.rootUrl + "login";
-			var userData = {
-				username: user.username,
-				authCode: CryptoJS.SHA1(user.username + user.password).toString()
-			};
+    var MainPersister = Class.create({
+        init: function (rootUrl) {
+            this.rootUrl = rootUrl;
+            this.user = new UserPersister(this.rootUrl);
+            this.place = new PlacePersister(this.rootUrl);
+            this.comment = new CommentPersister(this.rootUrl);
+        },
+        isUserLoggedIn: function () {
+            var isLoggedIn = nickname != null && sessionKey != null;
+            return isLoggedIn;
+        },
+        nickname: function () {
+            return nickname;
+        }
+    });
+    var UserPersister = Class.create({
+        init: function (rootUrl) {
+            this.rootUrl = rootUrl + "users/";
+        },
+        login: function (user, success, error) {
+            var url = this.rootUrl + "login";
+            var userData = {
+                username: user.username,
+                authCode: CryptoJS.SHA1(user.username + user.password).toString()
+            };
 
-			httpRequester.postJson(url, userData,
+            httpRequester.postJson(url, userData,
 				function (data) {
-					saveUserData(data);
-					success(data);
+				    saveUserData(data);
+				    success(data);
 				}, error);
-		},
-		register: function (user, success, error) {
-			var url = this.rootUrl + "register";
-			var userData = {
-				username: user.username,
-				nickname: user.nickname,
-				authCode: CryptoJS.SHA1(user.username + user.password).toString()
-			};
-			httpRequester.postJson(url, userData,
+        },
+        register: function (user, success, error) {
+            var url = this.rootUrl + "register";
+            var userData = {
+                username: user.username,
+                nickname: user.nickname,
+                authCode: CryptoJS.SHA1(user.username + user.password).toString()
+            };
+            httpRequester.postJson(url, userData,
 				function (data) {
-					saveUserData(data);
-					success(data);
+				    saveUserData(data);
+				    success(data);
 				}, error);
-		},
-		logout: function (success, error) {
-			var url = this.rootUrl + "logout/" + sessionKey;
-			httpRequester.getJson(url, function (data) {
-				clearUserData();
-				success(data);
-			}, error)
-		}
-	});
+        },
+        logout: function (success, error) {
+            var url = this.rootUrl + "logout/" + sessionKey;
+            httpRequester.getJson(url, function (data) {
+                clearUserData();
+                success(data);
+            }, error)
+        },
+        getAll: function (success, error) {
+            var url = this.rootUrl + "get-all/";
+            httpRequester.getJson(url, success, error);
+        }
+    });
 
-	var PlacePersister = Class.create({
-	    init: function (rooturl) {
-	        this.rootUrl = rooturl + 'places/';
-	    },
-	});
+    var PlacePersister = Class.create({
+        init: function (rooturl) {
+            this.rootUrl = rooturl + 'places/';
+        },
+    });
 
-	var CommentPersister = Class.create({
-	    init: function (rooturl) {
-	        this.rootUrl = rooturl + 'comment/';
-	    },
-	});
+    var CommentPersister = Class.create({
+        init: function (rooturl) {
+            this.rootUrl = rooturl + 'comments/';
+        },
+        create: function () {
 
-	return {
-		get: function (url) {
-			return new MainPersister(url);
-		}
-	};
+        },
+
+        getAll: function (success, error) {
+            var url = this.rootUrl + "get-all/"
+            httpRequester.getJson(url, success, error);
+        }
+    });
+
+    return {
+        get: function (url) {
+            return new MainPersister(url);
+        }
+    };
 }());

@@ -60,6 +60,7 @@
     <Content Include="index.html" />
     <Content Include="packages.config" />
     <None Include="scripts\libs\jquery-2.0.3.intellisense.js" />
+    <Content Include="scripts\controller.js" />
     <Content Include="scripts\http-requester.js" />
     <Content Include="scripts\libs\class.js" />
     <Content Include="scripts\libs\jquery-2.0.3.js" />
