@@ -13,10 +13,19 @@ namespace FoursquareApp.Api.Resolvers
 {
     public class DbDependencyResolver : IDependencyResolver
     {
-        private static FoursquareContext dbContext = new FoursquareContext();
-        private static IRepository<Place> placesRepo = new EfRepository<Place>(dbContext);
-        private static IRepository<Comment> commentsRepo = new EfRepository<Comment>(dbContext);
-        private static IRepository<User> usersRepo = new EfRepository<User>(dbContext);
+        // Note this shit is not tested
+        private FoursquareContext dbContext;
+        private IRepository<Place> placesRepo;
+        private IRepository<Comment> commentsRepo;
+        private IRepository<User> usersRepo;
+
+        public DbDependencyResolver()
+        {
+            dbContext = new FoursquareContext();
+            placesRepo = new EfRepository<Place>(dbContext);
+            commentsRepo = new EfRepository<Comment>(dbContext);
+            usersRepo = new EfRepository<User>(dbContext);
+        }
 
         public IDependencyScope BeginScope()
         {
