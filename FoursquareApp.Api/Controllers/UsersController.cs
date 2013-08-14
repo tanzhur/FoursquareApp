@@ -51,12 +51,14 @@ namespace FoursquareApp.Api.Controllers
         [ActionName("register")]
         public HttpResponseMessage RegisterUser([FromBody]UserRegisterModel inputUser)
         {
-            if (inputUser.Username == null || inputUser.Username == "")//|| inputUser.AuthCode.Length != 40)
+            if (string.IsNullOrWhiteSpace(inputUser.Username) || 
+                string.IsNullOrWhiteSpace(inputUser.AuthCode) || 
+                inputUser.AuthCode.Length != 40)
             {
                 return this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Username or password is invalid");
             }
 
-            User foundedUser = userRepo.All().Where(u => u.Username == inputUser.Username);
+            User foundedUser = userRepo.All().Where(u => u.Username == inputUser.Username).FirstOrDefault();
 
             if (foundedUser != null)
             {
@@ -97,6 +99,10 @@ namespace FoursquareApp.Api.Controllers
             {
                 return this.Request.CreateErrorResponse(HttpStatusCode.NotFound, "Username or password don't match");
             }
+            else if (currentUser.SessionKey != null)
+            {
+                return this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, "User already logged in.");
+            }
 
             UserLoggedModel loggedUser = new UserLoggedModel()
             {
@@ -117,6 +123,11 @@ namespace FoursquareApp.Api.Controllers
         public HttpResponseMessage LogoutUser(string sessionKey)
         {
             User currentUser = userRepo.All().Where(u => u.SessionKey == sessionKey).FirstOrDefault();
+
+            if (currentUser == null)
+            {
+                this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, "User is not logged in or does not exist!");
+            }
 
             currentUser.SessionKey = null;
 
