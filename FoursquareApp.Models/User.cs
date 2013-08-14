@@ -20,6 +20,8 @@ namespace FoursquareApp.Models
 
         public string Password { get; set; }
 
+        public string SessionKey { get; set; }
+
         public virtual ICollection<Place> Places { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
