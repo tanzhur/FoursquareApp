@@ -122,7 +122,7 @@ namespace FoursquareApp.Api.Controllers
 
             ICollection<PlaceModel> resultPlaceModels = new List<PlaceModel>();
 
-            foreach (Place currentPlace in currentUser.Places)
+            foreach (Place currentPlace in allPlaces)
             {
                 if (Math.Abs(currentUser.Longitude - currentPlace.Longitude) <= 1 && 
                         Math.Abs(currentUser.Latitude - currentPlace.Longitude) <= 1)
