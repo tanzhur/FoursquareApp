@@ -9,7 +9,7 @@ namespace FoursquareApp.Data.Migrations
     {
         public Configuration()
         {
-            this.AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = true;
             this.AutomaticMigrationDataLossAllowed = true;
         }
 
