@@ -25,7 +25,6 @@ namespace FoursquareApp.Api.Controllers
         [ActionName("create")]
         public HttpResponseMessage CreatePlace(string sessionKey, [FromBody] PlaceModelRegister place)
         {
-            // TODO: 
             Place existingPlace = placesRepo.All().Where(p => p.Longitude == place.Longitude && p.Longitude == place.Longitude).FirstOrDefault();
             if (existingPlace != null)
             {
@@ -50,11 +49,91 @@ namespace FoursquareApp.Api.Controllers
             return this.Request.CreateResponse(HttpStatusCode.OK, place);
         }
 
-        //[HttpGet]
-        //[ActionName("get-all")]
-        //public HttpResponseMessage GetPlaces(string sessionKey)
-        //{
-            
-        //}
+        [HttpGet]
+        [ActionName("get-all")]
+        public HttpResponseMessage GetAllPlaces()
+        {
+            ICollection<PlaceModel> resultPlaces = new List<PlaceModel>();
+
+            var allPlaces = placesRepo.All();
+
+            foreach (Place currentPlace in allPlaces)
+            {
+                PlaceModel currentModelPlace = new PlaceModel(currentPlace);
+
+                resultPlaces.Add(currentModelPlace);
+            }
+
+            if (resultPlaces.Count == 0)
+            {
+                return this.Request.CreateErrorResponse(HttpStatusCode.NoContent, "There aren't any places yet");
+            }
+            else
+            {
+                return this.Request.CreateResponse(HttpStatusCode.OK, resultPlaces);
+            }
+        }
+
+        [HttpGet]
+        [ActionName("get-current")]
+        public HttpResponseMessage GetCurrentUserPlaces(string sessionKey)
+        {
+            User currentUser = usersRepo.All().Where(u => u.SessionKey == sessionKey).FirstOrDefault();
+
+            if (currentUser == null)
+            {
+                return this.Request.CreateErrorResponse(HttpStatusCode.NotFound, "There isn't such logged user.");
+            }
+
+            ICollection<PlaceModel> resultPlaces = new List<PlaceModel>();
+
+            foreach (Place currentPlace in currentUser.Places)
+            {
+                PlaceModel currentPlaceModel = new PlaceModel(currentPlace);
+
+                resultPlaces.Add(currentPlaceModel);
+            }
+
+            return this.Request.CreateResponse(HttpStatusCode.OK, resultPlaces);
+        }
+
+        [HttpGet]
+        [ActionName("get-closest")]
+        public HttpResponseMessage GetCurrentUserClosestPlaces(string sessionKey)
+        {
+            ICollection<PlaceModel> allPlaceModels = new List<PlaceModel>();
+
+            var allPlaces = placesRepo.All();
+
+            foreach (Place currentPlace in allPlaces)
+            {
+                PlaceModel currentModelPlace = new PlaceModel(currentPlace);
+
+                allPlaceModels.Add(currentModelPlace);
+            }
+
+
+            User currentUser = usersRepo.All().Where(u => u.SessionKey == sessionKey).FirstOrDefault();
+
+            if (currentUser == null)
+            {
+                return this.Request.CreateErrorResponse(HttpStatusCode.NotFound, "There isn't such logged user.");
+            }
+
+            ICollection<PlaceModel> resultPlaceModels = new List<PlaceModel>();
+
+            foreach (Place currentPlace in currentUser.Places)
+            {
+                if (Math.Abs(currentUser.Longitude - currentPlace.Longitude) <= 1 && 
+                        Math.Abs(currentUser.Latitude - currentPlace.Longitude) <= 1)
+                {
+                    PlaceModel currentPlaceModel = new PlaceModel(currentPlace);
+
+                    resultPlaceModels.Add(currentPlaceModel);
+                }
+            }
+
+            return this.Request.CreateResponse(HttpStatusCode.OK, resultPlaceModels);
+        }
     }
 }

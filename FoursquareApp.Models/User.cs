@@ -22,6 +22,10 @@ namespace FoursquareApp.Models
 
         public string SessionKey { get; set; }
 
+        public decimal Longitude { get; set; }
+
+        public decimal Latitude { get; set; }
+
         public virtual ICollection<Place> Places { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
