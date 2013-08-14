@@ -47,4 +47,13 @@ namespace FoursquareApp.Api.Models
             }
         }
     }
+
+    public class PlaceModelRegister
+    {
+        public string Name { get; set; }
+
+        public decimal Longitude { get; set; }
+
+        public decimal Latitude { get; set; }
+    }
 }

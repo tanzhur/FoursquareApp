@@ -135,18 +135,5 @@ namespace FoursquareApp.Api.Controllers
 
             return this.Request.CreateResponse(HttpStatusCode.OK);
         }
-
-        //[HttpPost]
-        //[ActionName("comment")]
-        //public HttpResponseMessage CommentPlace([FromBody]Comment inputComment, int userId, int placeId)
-        //{
-        //}
-
-        //[HttpPost]
-        //[ActionName("check-in")]
-        //public HttpResponseMessage CheckInPlace(int userId, int placeId)
-        //{
-        //    UserController.CheckInPlace(userId, placeId);
-        //}
     }
 }

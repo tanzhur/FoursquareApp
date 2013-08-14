@@ -27,7 +27,7 @@ namespace FoursquareApp.Api.Resolvers
         {
             if (serviceType == typeof(PlacesController))
             {
-                return new PlacesController(placesRepo);
+                return new PlacesController(placesRepo, usersRepo);
             }
             else if (serviceType == typeof(UsersController))
             {
