@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoursquareApp.Clinet.Web", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoursquareApp.Api", "FoursquareApp.Api\FoursquareApp.Api.csproj", "{3368E45F-E746-4F50-9399-12E0C05EA19B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foursquare.PubNubProvider", "Foursquare.PubNubProvider\Foursquare.PubNubProvider.csproj", "{3895900A-F626-4641-AD57-DE3CA5FA670C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoursquareApp.PubNubProvider", "FoursquareApp.PubNubProvider\FoursquareApp.PubNubProvider.csproj", "{3895900A-F626-4641-AD57-DE3CA5FA670C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

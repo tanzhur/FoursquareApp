@@ -143,7 +143,7 @@ namespace FoursquareApp.Api.Controllers
         [ActionName("get-all")]
         public HttpResponseMessage AllUsers()
         {
-            var allUsers = userRepo.All();
+            var allUsers = userRepo.All().ToList();
 
             ICollection<UserModel> resultUsers = new List<UserModel>();
 
