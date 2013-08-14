@@ -22,12 +22,20 @@ namespace FoursquareApp.Api.Models
         [DataMember]
         public string SessionKey { get; set; }
 
+        [DataMember]
+        public List<PlaceModel> Places { get; set; }
+
         public UserModel(User user)
         {
             this.Id = user.Id;
             this.Username = user.Username;
             this.Password = user.Password;
             this.SessionKey = user.SessionKey;
+
+            //foreach (Place currentPlace in user.Places)
+            //{
+            //    this.Places.Add(currentPlace.Name);
+            //}
         }
     }
 
