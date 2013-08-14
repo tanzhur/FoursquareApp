@@ -1,7 +1,7 @@
 ﻿/// <reference path="persister.js" />
 
 $(function () {
-    var persister = persisters.get("http://localhost:6514/api/");
+    var persister = persisters.get("http://foursquareapp.apphb.com/api/");
 
     persister.user.getAll(function (data) {
         console.log(data);
