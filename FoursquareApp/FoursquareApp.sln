@@ -1,7 +1,49 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoursquareApp.Models", "FoursquareApp.Models\FoursquareApp.Models.csproj", "{DF0C27EF-EF30-4B8A-B0D1-7BE13BE1150C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoursquareApp.Data", "FoursquareApp.Data\FoursquareApp.Data.csproj", "{2B37A51A-8F64-4593-A35B-0B27C5A892C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoursquareApp.Client", "FoursquareApp.Client\FoursquareApp.Client.csproj", "{858FC312-EECD-4712-B73F-EBD1B30DD06D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoursquareApp.Repos", "FoursquareApp.Repos\FoursquareApp.Repos.csproj", "{D94282B9-D1A7-431C-BDD0-A66CF2D77047}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoursquareApp.Clinet.Web", "FoursquareApp.Clinet.Web\FoursquareApp.Clinet.Web.csproj", "{A3CBC18C-ACF8-4FB8-BF14-E072D8E9BD2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoursquareApp.Api", "FoursquareApp.Api\FoursquareApp.Api.csproj", "{3368E45F-E746-4F50-9399-12E0C05EA19B}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF0C27EF-EF30-4B8A-B0D1-7BE13BE1150C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF0C27EF-EF30-4B8A-B0D1-7BE13BE1150C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF0C27EF-EF30-4B8A-B0D1-7BE13BE1150C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF0C27EF-EF30-4B8A-B0D1-7BE13BE1150C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B37A51A-8F64-4593-A35B-0B27C5A892C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B37A51A-8F64-4593-A35B-0B27C5A892C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B37A51A-8F64-4593-A35B-0B27C5A892C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B37A51A-8F64-4593-A35B-0B27C5A892C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{858FC312-EECD-4712-B73F-EBD1B30DD06D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{858FC312-EECD-4712-B73F-EBD1B30DD06D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{858FC312-EECD-4712-B73F-EBD1B30DD06D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{858FC312-EECD-4712-B73F-EBD1B30DD06D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D94282B9-D1A7-431C-BDD0-A66CF2D77047}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D94282B9-D1A7-431C-BDD0-A66CF2D77047}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D94282B9-D1A7-431C-BDD0-A66CF2D77047}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D94282B9-D1A7-431C-BDD0-A66CF2D77047}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3CBC18C-ACF8-4FB8-BF14-E072D8E9BD2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3CBC18C-ACF8-4FB8-BF14-E072D8E9BD2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3CBC18C-ACF8-4FB8-BF14-E072D8E9BD2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3CBC18C-ACF8-4FB8-BF14-E072D8E9BD2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3368E45F-E746-4F50-9399-12E0C05EA19B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3368E45F-E746-4F50-9399-12E0C05EA19B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3368E45F-E746-4F50-9399-12E0C05EA19B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3368E45F-E746-4F50-9399-12E0C05EA19B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
