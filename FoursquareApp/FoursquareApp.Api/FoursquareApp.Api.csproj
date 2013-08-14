@@ -164,12 +164,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlacesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resolvers\DbDependencyResolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -287,11 +285,16 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Resolvers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FoursquareApp.Data\FoursquareApp.Data.csproj">
+      <Project>{2b37a51a-8f64-4593-a35b-0b27c5a892c4}</Project>
+      <Name>FoursquareApp.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FoursquareApp.Models\FoursquareApp.Models.csproj">
       <Project>{df0c27ef-ef30-4b8a-b0d1-7be13be1150c}</Project>
       <Name>FoursquareApp.Models</Name>
