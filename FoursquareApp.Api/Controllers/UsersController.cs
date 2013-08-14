@@ -170,17 +170,22 @@ namespace FoursquareApp.Api.Controllers
                 return this.Request.CreateErrorResponse(HttpStatusCode.NotFound, "User or Place wasn't found");
             }
 
-            if (currentUser.currentPlace != null && currentUser.currentPlace.Id != currentPlace.Id)
+            if (currentUser.currentPlaceId == 0)
             {
-                currentUser.currentPlace = currentPlace;
-                currentUser.Places.Add(currentPlace);
-                currentPlace.Users.Add(currentUser);
+                currentUser.currentPlaceId = currentPlace.Id;
+                userRepo.Update(currentUser.Id, currentUser);
             }
-            else
+            else if (currentUser.currentPlaceId != currentPlace.Id)
             {
-                currentUser.Places.Add(currentPlace);
-                currentPlace.Users.Add(currentUser);
+                currentUser.currentPlaceId = currentPlace.Id;
+                userRepo.Update(currentUser.Id, currentUser);    
             }
+
+            currentUser.Places.Add(currentPlace);
+            currentPlace.Users.Add(currentUser);
+
+            userRepo.Update(currentUser.Id, currentUser);
+            placeRepo.Update(currentPlace.Id, currentPlace);
 
             return this.Request.CreateResponse(HttpStatusCode.OK);
         }

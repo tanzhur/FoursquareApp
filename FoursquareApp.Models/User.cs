@@ -26,7 +26,7 @@ namespace FoursquareApp.Models
 
         public decimal Latitude { get; set; }
 
-        public Place currentPlace { get; set; }
+        public int  currentPlaceId { get; set; }
 
         public virtual ICollection<Place> Places { get; set; }
 
