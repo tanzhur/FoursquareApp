@@ -42,4 +42,37 @@ namespace FoursquareApp.Api.Models
             this.Place = new PlaceModel(comment.Place);
         }     
     }
+
+    [DataContract]
+    public class CommentRegisterModel
+    {
+        [DataMember]
+        public string Content { get; set; }
+        [DataMember]
+        public int PlaceId { get; set; }
+    }
+
+    [DataContract]
+    public class CommentFlatModel
+    {
+        [DataMember]
+        public string Content { get; set; }
+
+        [DataMember]
+        public DateTime CreationDate { get; set; }
+
+        [DataMember]
+        public string User { get; set; }
+
+        [DataMember]
+        public string Place { get; set; }
+
+        public CommentFlatModel(Comment comment)
+        {
+            this.Content = comment.Content;
+            this.CreationDate = comment.PostTime;
+            this.Place = comment.Place.Name;
+            this.User = comment.User.Username;
+        }
+    }
 }

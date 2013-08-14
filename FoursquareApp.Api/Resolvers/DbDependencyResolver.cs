@@ -35,7 +35,7 @@ namespace FoursquareApp.Api.Resolvers
             }
             else if(serviceType == typeof(CommentsController))
             {
-                return new CommentsController(commentsRepo);
+                return new CommentsController(commentsRepo, usersRepo, placesRepo);
             }
             else
             {
