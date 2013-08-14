@@ -31,7 +31,7 @@ namespace FoursquareApp.Api.Resolvers
             }
             else if (serviceType == typeof(UsersController))
             {
-                return new UsersController(usersRepo);
+                return new UsersController(usersRepo, placesRepo);
             }
             else if(serviceType == typeof(CommentsController))
             {

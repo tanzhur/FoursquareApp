@@ -21,11 +21,12 @@ namespace FoursquareApp.Api.Controllers
         protected static Random rand = new Random();
 
         private IRepository<User> userRepo;
-
+        private IRepository<Place> placeRepo;
         /// Constructor
-        public UsersController(IRepository<User> inputRepo)
+        public UsersController(IRepository<User> inputUserRepo, IRepository<Place> inputPlaceRepo)
         {
-            this.userRepo = inputRepo;
+            this.userRepo = inputUserRepo;
+            this.placeRepo = inputPlaceRepo;
         }
 
         private static string GenerateSessionKey(int userId)
@@ -47,6 +48,7 @@ namespace FoursquareApp.Api.Controllers
         }
 
         /// Public methods for requests
+        /// http://appname/api/users/register
         [HttpPost]
         [ActionName("register")]
         public HttpResponseMessage RegisterUser([FromBody]UserRegisterModel inputUser)
@@ -119,7 +121,6 @@ namespace FoursquareApp.Api.Controllers
             return this.Request.CreateResponse(HttpStatusCode.OK, loggedUser);
         }
 
-
         [HttpGet]
         [ActionName("logout")]
         public HttpResponseMessage LogoutUser(string sessionKey)
@@ -139,7 +140,7 @@ namespace FoursquareApp.Api.Controllers
         }
 
         [HttpGet]
-        [ActionName("all")]
+        [ActionName("get-all")]
         public HttpResponseMessage AllUsers()
         {
             var allUsers = userRepo.All();
@@ -153,5 +154,36 @@ namespace FoursquareApp.Api.Controllers
 
             return this.Request.CreateResponse(HttpStatusCode.OK, resultUsers);
         }
+
+        [HttpPost]
+        [ActionName("check-in")]
+        public HttpResponseMessage CheckInPlace(string sessionKey,[FromBody]string PlaceId)
+        {
+
+            int id = int.Parse(PlaceId);
+
+            User currentUser = userRepo.All().Where(u => u.SessionKey == sessionKey).FirstOrDefault();
+            Place currentPlace = placeRepo.All().Where(p => p.Id == id).FirstOrDefault();
+
+            if (currentUser == null || currentPlace == null)
+            {
+                return this.Request.CreateErrorResponse(HttpStatusCode.NotFound, "User or Place wasn't found");
+            }
+
+            if (currentUser.currentPlace != null && currentUser.currentPlace.Id != currentPlace.Id)
+            {
+                currentUser.currentPlace = currentPlace;
+                currentUser.Places.Add(currentPlace);
+                currentPlace.Users.Add(currentUser);
+            }
+            else
+            {
+                currentUser.Places.Add(currentPlace);
+                currentPlace.Users.Add(currentUser);
+            }
+
+            return this.Request.CreateResponse(HttpStatusCode.OK);
+        }
+
     }
 }
