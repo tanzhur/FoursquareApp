@@ -61,6 +61,12 @@ namespace FoursquareApp.Api.Models
 
         [DataMember]
         public string AuthCode { get; set; }
+
+        [DataMember]
+        public decimal Longitude { get; set; }
+
+        [DataMember]
+        public decimal Latitude { get; set; }
     }
 
     [DataContract]

@@ -68,7 +68,9 @@ namespace FoursquareApp.Api.Controllers
             User userToBeRegistered = new User()
             {
                 Username = inputUser.Username,
-                Password = inputUser.AuthCode
+                Password = inputUser.AuthCode,
+                Latitude = inputUser.Latitude,
+                Longitude = inputUser.Longitude
             };
 
             userRepo.Add(userToBeRegistered);
