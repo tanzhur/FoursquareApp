@@ -267,8 +267,23 @@ var controllers = (function () {
                             title: "Comment It",
                             command: {
                                 text: "Comment",
-                                click: function () {
+                                click: function (e) {
+                                    e.preventDefault();
 
+                                    var currentPlace = this.dataItem($(e.currentTarget).closest("tr"));
+                                    
+                                 
+                                    var wnd = $("#checkInMessageBox")
+                                        .kendoWindow({
+                                            title: "Information",
+                                            modal: true,
+                                            visible: false,
+                                            resizable: false,
+                                            width: 300
+                                        }).data("kendoWindow");
+
+                                    wnd.content(ui.buildInsertCommentUI() + '<div id="hidden-data" data-place-id="'+currentPlace.Id+'"></div>');
+                                    wnd.center().open();
                                 }
                             }
                         }
@@ -327,7 +342,23 @@ var controllers = (function () {
         attachUIEventHandlers: function (selector) {
             var wrapper = $(selector);
             var self = this;
+            $("body").on("click", "#submit-comment", function () {
+                
+                
+                var commentContent = $("#comment-content").val();
+                var id = $("#hidden-data").data("place-id");
 
+                var commentRegisterModel = {
+                    PlaceId : id, 
+                    Content: commentContent
+                };
+
+                self.persister.comment.create(commentRegisterModel, function () {
+                    self.loadAppUI();
+                }, function() {
+                });
+
+            });
             wrapper.on("click", "#btn-show-login", function () {
                 wrapper.find(".button.selected").removeClass("selected");
                 $(this).addClass("selected");

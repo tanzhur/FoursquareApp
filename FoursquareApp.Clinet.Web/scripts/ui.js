@@ -41,6 +41,7 @@
                 '<div class="k-content">' +
             '<div id="main-content">' +
             '<div id="checkInMessageBox"></div>' +
+            '<div id="commentsInputBox"></div>'+
                 '<div id="tabstrip">' +
                     '<ul>' +
                         '<li class="k-state-active">' +
@@ -104,11 +105,22 @@
         return html;
     }
 
+    function buildCommentInput() {
+        var html = "";
+        html += '<h4> Comment this place </h4>' +
+                '<textarea id="comment-content"></textarea>' +
+                '<button id="submit-comment" class="btn btn-success">Post comment</button>';
+
+        return html;
+    }
+
     return {
         appUI: buildAppUI,
         loginForm: buildLoginForm,
         buildPlaceAdd: buildAddPlaceWindow,
-        buildPubNub: buildPubNubUI
+        buildPubNub: buildPubNubUI,
+        buildInsertCommentUI: buildCommentInput
+
     }
 
 }());
