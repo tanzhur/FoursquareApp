@@ -60,12 +60,7 @@ namespace FoursquareApp.Api.Controllers
         {
             this.pubnub.Publish(this.channel, item);
         }
-        // AttachImage(int PlaceID)
-        /*
-         * {
-         *  Place currentPlace = placeRepo.All().Where(p => p.Id == PlaceId).FirstOrDefault();
-         * }
-         */
+        
         [HttpPost]
         [ActionName("register")]
         public HttpResponseMessage RegisterUser([FromBody]UserRegisterModel inputUser)
@@ -150,7 +145,7 @@ namespace FoursquareApp.Api.Controllers
 
             if (currentUser == null)
             {
-                this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, "User is not logged in or does not exist!");
+                return this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, "User is not logged in or does not exist!");
             }
 
             currentUser.SessionKey = null;

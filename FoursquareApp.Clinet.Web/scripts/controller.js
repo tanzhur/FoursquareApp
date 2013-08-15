@@ -6,7 +6,9 @@
 /// <reference path="ui.js" />
 
 var controllers = (function () {
-    var baseUrl = "http://foursquareapp.apphb.com/api/";
+    //local check
+    var baseUrl = "http://localhost:6514/api/";
+    //var baseUrl = "http://foursquareapp.apphb.com/api/";
 
     var Controller = Class.create({
         init: function () {
