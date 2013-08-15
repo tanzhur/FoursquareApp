@@ -19,8 +19,8 @@ namespace FoursquareApp.Client
 
         static void Main(string[] args)
         {
-            FoursquareContext testContext = new FoursquareContext();
-            string image = "img1.jpg";
+           // FoursquareContext testContext = new FoursquareContext();
+            
             //testContext.Users.Add(new User() { Username = "MegaTest" });
             //testContext.SaveChanges();
 
@@ -33,6 +33,9 @@ namespace FoursquareApp.Client
             //}
 
             //Console.WriteLine("WTF!");
+
+            string image = "img1.jpg";
+
             DropboxProvider dropboxProvider = new DropboxProvider();
 
             DropboxServiceProvider dropboxServiceProvider =

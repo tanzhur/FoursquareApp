@@ -73,11 +73,11 @@ namespace FoursquareApp.Client
             //Console.WriteLine("Created folder: {0}", createFolderEntry.Path);
 
             // Upload a file
-            Entry uploadFileEntry = dropbox.UploadFile(new FileResource("../../TestImages/"+image), "/" + image);
+            Entry uploadFileEntry = dropbox.UploadFile(new FileResource("../../TestImages/"+image), "/"+ image);
 
             // take url
-            DropboxLink sharedUrl = dropbox.GetShareableLink(uploadFileEntry.Path);
-            Console.WriteLine(sharedUrl.Url);
+            DropboxLink link = dropbox.GetMediaLink(uploadFileEntry.Path);
+            Console.WriteLine(link.Url);
         }
     }
 }
