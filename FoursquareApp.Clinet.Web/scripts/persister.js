@@ -35,6 +35,7 @@ var persisters = (function () {
             this.user = new UserPersister(this.rootUrl);
             this.place = new PlacePersister(this.rootUrl);
             this.comment = new CommentPersister(this.rootUrl);
+            this.image = new ImagePersister(this.rootUrl);
         },
         isUserLoggedIn: function () {
             var isLoggedIn = nickname != null && sessionKey != null;
@@ -164,6 +165,20 @@ var persisters = (function () {
         getAllSerciceUrl: function () {
             var url = this.rootUrl + "get-all/";
             return url;
+        }
+    });
+
+    var ImagePersister = Class.create({
+        init: function (rooturl) {
+            this.rootUrl = rooturl + 'images/';
+        },
+        attach: function (data, success, error) {
+            var url = this.rootUrl + "attach-picture/" + sessionKey;
+            httpRequester.postJson(url, data, success, error);
+        },
+        getAll: function (data, success, error) {
+            var url = this.rootUrl + "get-all-pictures/";
+            httpRequester.postJson(url, data, success, error);
         }
     });
 
