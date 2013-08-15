@@ -7,8 +7,8 @@
 
 var controllers = (function () {
     //local check
-    //var baseUrl = "http://localhost:6514/api/";
-    var baseUrl = "http://foursquareapp.apphb.com/api/";
+    var baseUrl = "http://localhost:6514/api/";
+    //var baseUrl = "http://foursquareapp.apphb.com/api/";
 
     var Controller = Class.create({
         init: function () {
@@ -33,6 +33,7 @@ var controllers = (function () {
                 this.persister.nickname(),
                 this.persister.latitude(),
                 this.persister.longtitude()));
+            $("#pub-nub").append(ui.buildPubNub());
             this.loadPubNubScripts();
             this.loadPlacesTabContent(selector);
             this.loadTabScript();

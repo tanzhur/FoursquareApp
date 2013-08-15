@@ -27,19 +27,17 @@
     }
 
     function buildAppUI(nickname, lan, lat) {
-        var html = '<p class="text-info">' +
+        var html = '<div id="user-panel"><p class="text-info">Username: <strong>' +
 				nickname +
-		'</p>' +
-        '<p class="text-info">' +
+		'</strong></p>' +
+        '<p class="text-info">Latitude: <strong>' +
 				lan +
-		'</p>' +
-        '<p class="text-info">' +
+		'</strong></p>' +
+        '<p class="text-info">Longtitude: <strong>' +
 				lat +
-		'</p>' +
-        '<div class="row-fluid">' +
-		'<button id="btn-logout" class="btn btn-danger span1">Logout</button>' +
-        '<button id="btn-create-place" class="btn btn-success span2">Create place</button>' +
-        '</div>' +
+		'</strong></p></div>' +
+		'<button id="btn-logout" class="btn btn-danger">Logout</button>' +
+        '<button id="btn-create-place" class="btn btn-success">Create place</button>' +
                 '<div class="k-content">' +
             '<div id="main-content">' +
                 '<div id="tabstrip">' +
@@ -95,10 +93,21 @@
         return html;
     }
 
+    function buildPubNubUI() {
+        var html = '<h4>Leatest Check-ins</h4> \
+            <div id="pn-messages"> \
+                <ul> \
+                </ul> \
+            </div>';
+
+        return html;
+    }
+
     return {
         appUI: buildAppUI,
         loginForm: buildLoginForm,
-        buildPlaceAdd: buildAddPlaceWindow
+        buildPlaceAdd: buildAddPlaceWindow,
+        buildPubNub: buildPubNubUI
     }
 
 }());

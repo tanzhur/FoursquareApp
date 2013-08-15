@@ -3,4 +3,17 @@
     height: 500px;
     overflow-y: scroll;
     overflow-x: hidden;
+    border-radius: 3px;
+}
+
+#user-panel {
+    padding: 10px;
+    margin-top: 20px;
+    margin-left: 10px;
+    border: 1px solid #F0713A;
+    border-radius: 3px;
+}
+
+#btn-logout, #btn-create-place {
+    margin: 10px;
 }
