@@ -108,7 +108,7 @@ var persisters = (function () {
             this.rootUrl = rooturl + 'places/';
         },
         create: function (data, sucess, error) {
-            var url = this.rooturl + "create/";
+            var url = this.rootUrl + "create/" + sessionKey;
 
             httpRequester.postJson(url, data, sucess, error);
         },

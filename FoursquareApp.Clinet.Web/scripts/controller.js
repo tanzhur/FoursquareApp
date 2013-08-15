@@ -21,6 +21,7 @@ var controllers = (function () {
             else {
                 this.loadLoginFormUI(selector);
             }
+
             this.attachUIEventHandlers(selector);
         },
         loadLoginFormUI: function (selector) {
@@ -122,7 +123,7 @@ var controllers = (function () {
 
                 if (!window.data("kendoWindow")) {
                     window.kendoWindow({
-                        width: "500px",
+                        width: "260px",
                         actions: ["Minimize", "Maximize", "Close"],
                         title: "Add new place.",
                         close: function () {
@@ -341,6 +342,25 @@ var controllers = (function () {
                     self.loadLoginFormUI(selector);
                 }, function (err) {
                 });
+            });
+
+            $("body").on("click", "#btn-crate-place", function () {
+                
+                var place = {
+                    name: $("#new-place-name").val(),
+                    longitude: $("#new-place-longtitude").val(),
+                    latitude: $("#new-place-latitude").val()
+                };
+
+                console.log(place);
+
+                self.persister.place.create(place, function () {
+                    self.loadAppUI(selector);
+                }, function (err) {
+                    console.log(err);
+                });
+
+                return false;
             });
         },
     });
