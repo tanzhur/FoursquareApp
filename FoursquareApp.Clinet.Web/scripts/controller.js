@@ -191,29 +191,32 @@ var controllers = (function () {
 
                                     var currentPlace = this.dataItem($(e.currentTarget).closest("tr"));
 
-                                    var wnd = $("#checkInBox")
-                                       .kendoWindow({
-                                           title: "Information",
-                                           modal: true,
-                                           visible: false,
-                                           resizable: false,
-                                           width: 300
-                                       }).data("kendoWindow");
+                                    var messageFunction = function (message, error) {
+                                        var wnd = $("#checkInMessageBox")
+                                           .kendoWindow({
+                                               title: "Information",
+                                               modal: true,
+                                               visible: false,
+                                               resizable: false,
+                                               width: 300
+                                           }).data("kendoWindow");
+
+                                        wnd.content(message);
+                                        wnd.center().open();
+
+                                        if (error) {
+                                            console.log(error);
+                                        }
+
+                                        setTimeout(function () {
+                                            wnd.center().close();
+                                        }, 1500);
+                                    }
 
                                     self.persister.user.checkIn(currentPlace.Id, function () {
-                                        wnd.content("You successfully have checked here !");
-                                        wnd.center().open();
-
-                                        setTimeout(function () {
-                                            wnd.center().close();
-                                        }, 1500);
+                                        messageFunction("You successfully checked");
                                     }, function () {
-                                        wnd.content("An error has occured !");
-                                        wnd.center().open();
-
-                                        setTimeout(function () {
-                                            wnd.center().close();
-                                        }, 1500);
+                                       messageFunction("You successfully checked");
                                     });
                                 }
                             },
@@ -260,7 +263,15 @@ var controllers = (function () {
                             field: "Images",
                             width: 120,
                             title: "Images"
-                        },
+                        }, {
+                            title: "Comment It",
+                            command: {
+                                text: "Comment",
+                                click: function () {
+
+                                }
+                            }
+                        }
                         ]
                     }, function () {
 
