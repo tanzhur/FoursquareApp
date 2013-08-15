@@ -371,7 +371,7 @@ var controllers = (function () {
 
             $("body").on("click", "#submit-url", function () {
                 var imageName = $("#image-name").val();
-                var imageUrl = $("#image-url").val();
+                var imageUrl = $("#link-url").val();
                 var PlaceID = $("#hidden-data-upload-image").data("place-id");
 
                 var ImageRegisterModel = {
@@ -379,6 +379,8 @@ var controllers = (function () {
                     ImageUrl: imageUrl,
                     PlaceId: PlaceID
                 };
+
+                console.log(ImageRegisterModel);
 
                 self.persister.image.attach(ImageRegisterModel, function () {
                     console.log("Successfully uploaded !");
