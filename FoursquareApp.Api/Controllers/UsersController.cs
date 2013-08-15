@@ -193,7 +193,7 @@ namespace FoursquareApp.Api.Controllers
             }
 
             currentUser.currentPlaceId = currentPlace.Id;
-            currentUser.Latitude = currentPlace.Longitude;
+            currentUser.Latitude = currentPlace.Latitude;
             currentUser.Longitude = currentPlace.Longitude;
 
             userRepo.Update(currentUser.Id, currentUser);
