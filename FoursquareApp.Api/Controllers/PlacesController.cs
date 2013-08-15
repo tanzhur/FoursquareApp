@@ -162,6 +162,8 @@ namespace FoursquareApp.Api.Controllers
             {
                 return this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.InnerException.ToString());
             }
+            url = DropboxProvider.AttachToPlace(imageInformation.ImageName, imageInformation.ImageUrl);
+            currentPlace.Images.Add(url);
             return this.Request.CreateResponse(HttpStatusCode.OK, url);
         }
     }
