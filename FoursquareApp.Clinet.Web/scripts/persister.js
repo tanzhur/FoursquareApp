@@ -3,7 +3,6 @@
 /// <reference path="libs/jquery-2.0.3.js" />
 /// <reference path="http-requester.js" />
 
-
 var persisters = (function () {
     var nickname = localStorage.getItem("username");
     var sessionKey = localStorage.getItem("sessionKey");
