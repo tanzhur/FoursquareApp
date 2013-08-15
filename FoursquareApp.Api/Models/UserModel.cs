@@ -75,7 +75,7 @@ namespace FoursquareApp.Api.Models
     }
 
     [DataContract]
-    public class UserRegisterModel //: UserModel
+    public class UserRegisterModel
     {
         [DataMember]
         public string Username { get; set; }
@@ -98,6 +98,12 @@ namespace FoursquareApp.Api.Models
 
         [DataMember]
         public string AuthCode { get; set; }
+        
+        [DataMember]
+        public decimal Longitude { get; set; }
+
+        [DataMember]
+        public decimal Latitude { get; set; }
     }
 
     [DataContract]
@@ -108,6 +114,12 @@ namespace FoursquareApp.Api.Models
 
         [DataMember]
         public string SessionKey { get; set; }
+
+        [DataMember]
+        public decimal Longitude { get; set; }
+
+        [DataMember]
+        public decimal Latitude { get; set; }
     }
 
     [DataContract]
