@@ -194,8 +194,12 @@ namespace FoursquareApp.Api.Controllers
             }
 
             currentUser.currentPlaceId = currentPlace.Id;
+            currentUser.Latitude = currentPlace.Longitude;
+            currentUser.Longitude = currentPlace.Longitude;
 
             userRepo.Update(currentUser.Id, currentUser);
+
+            //PubNub information sending 
 
             UserPlaceModel item = new UserPlaceModel(new UserModel(currentUser), new PlaceModel(currentPlace));
             
