@@ -7,15 +7,23 @@ using System.Net.Http;
 using System.Web.Http;
 using FoursquareApp.Models;
 using System.Text;
-using System.Security.Cryptography;
 using FoursquareApp.Api.Models;
-using FoursquareApp.Api.InternalControllers;
 using System.Configuration;
+using Newtonsoft.Json;
 
 namespace FoursquareApp.Api.Controllers
 {
     public class UsersController : ApiController
     {
+        private readonly PubnubAPI pubnub = new PubnubAPI(
+            "pub-c-dc19a1e8-4dd2-4c2d-8099-1f73b901d609",               // PUBLISH_KEY
+            "sub-c-abf55e18-0580-11e3-991c-02ee2ddab7fe",               // SUBSCRIBE_KEY
+            "sec-c-ZTJkZDRlYTUtNTBlNC00N2M4LTgzYTctOTliNmFhYTkxNGU2",   // SECRET_KEY
+            true                                                        // SSL_ON?
+        );
+        private readonly string channel = "userplaces-channel";
+
+     
         
         private const string SessionKeyChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         private const int SessionKeyLen = 50;
@@ -46,6 +54,11 @@ namespace FoursquareApp.Api.Controllers
             }
             string sessionKey = keyChars.ToString();
             return sessionKey;
+        }
+
+        private void SendPubnubMessage(UserPlaceModel item)
+        {
+            this.pubnub.Publish(this.channel, JsonConvert.SerializeObject(item));
         }
 
         [HttpPost]
@@ -179,19 +192,9 @@ namespace FoursquareApp.Api.Controllers
 
             userRepo.Update(currentUser.Id, currentUser);
 
-            // EVENT SUBSCRIPTION
-
-            //var subscribedUsers = userRepo.All().Where(u => u.currentPlaceId == PlaceId && u.Username != currentUser.Username);
-
-            //foreach (User subsribedUser in subscribedUsers)
-            //{
-            //    subsribedUser.SendMessage(
-            //        "User" + currentUser.Username + "has checked in " + currentPlace.Name;
-            //    );
-            //}
-            /// PubNub
-            /// Send to all users, where u => u.currentPlaceId == PlaceId && u.Username != currentUser.Username
-            /// Message : currentUser.Username has Checked in currentPlace.Name
+            UserPlaceModel item = new UserPlaceModel(new UserModel(currentUser), new PlaceModel(currentPlace));
+            
+            SendPubnubMessage(item);
 
             return this.Request.CreateResponse(HttpStatusCode.OK, string.Format("You successfully checked in : {0} !", currentPlace.Name));
         }

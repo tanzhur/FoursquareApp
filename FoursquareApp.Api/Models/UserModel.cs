@@ -100,4 +100,20 @@ namespace FoursquareApp.Api.Models
         [DataMember]
         public string SessionKey { get; set; }
     }
+
+    [DataContract]
+    public class UserPlaceModel
+    {
+        public UserPlaceModel(UserModel user, PlaceModel place)
+        {
+            this.User = user;
+            this.Place = place;
+        }
+
+        [DataMember]
+        public UserModel User { get; set; }
+
+        [DataMember]
+        public PlaceModel Place { get; set; }
+    }
 }
