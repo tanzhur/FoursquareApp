@@ -110,6 +110,7 @@ var controllers = (function () {
             $(selector).append(ui.buildPlaceAdd());
             $('#add-form').hide();
 
+            // Pop up window for place craete
             $(document).ready(function () {
 
 
@@ -133,6 +134,7 @@ var controllers = (function () {
                 }
             });
 
+            // Grid generation for places
             $(document).ready(function () {
                 $("#close").kendoGrid({
                     dataSource: {
@@ -173,9 +175,9 @@ var controllers = (function () {
                     }, {
                         command: {
                             text: "Check In !",
-                            click: self.uploadImages
+                            click: self.uploadImages()
                         },
-                        title: " ",
+                        title: "Check in",
                         width: 120
                     }
                     ]
@@ -370,28 +372,3 @@ var controllers = (function () {
         }
     }
 }());
-//persister.user.getAll(function (data) {
-//    console.log(data);
-//}, function (error) {
-//    console.log(error);
-//});
-
-//persister.comment.getAll(function (data) {
-//    console.log(data);
-//}, function (error) {
-//    console.log(error);
-//});
-
-//$(document).ready(function () {
-//    $("#grid").kendoGrid({
-//        dataSource: {
-//            transport: {
-//                read: {
-//                    url: "http://foursquareapp.apphb.com/api/comments/get-all",
-//                    dataType: "json"
-//                }
-//            },
-//            pageSize: 5,
-//        },
-//    });
-//});
