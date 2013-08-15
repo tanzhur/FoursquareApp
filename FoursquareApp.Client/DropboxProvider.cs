@@ -6,6 +6,7 @@ using Spring.Social.OAuth1;
 using Spring.Social.Dropbox.Api;
 using Spring.Social.Dropbox.Connect;
 using Spring.IO;
+using System.Net.Http;
 
 namespace FoursquareApp.Client
 {
@@ -23,7 +24,7 @@ namespace FoursquareApp.Client
 
         public void AuthorizeAppOAuth(DropboxServiceProvider dropboxServiceProvider, string OAuthTokenFileName)
         {
-            // Authorization without callback url
+           //  Authorization without callback url
             Console.Write("Getting request token...");
             OAuthToken oauthToken = dropboxServiceProvider.OAuthOperations.FetchRequestToken(null, null);
             Console.WriteLine("Done.");
@@ -64,7 +65,7 @@ namespace FoursquareApp.Client
             return dropbox;
         }
 
-        public void TakeUrl(IDropbox dropbox, string image)
+        public void TakeUrl(IDropbox dropbox, string image, string address)
         {
 
             // Create new folder
@@ -72,11 +73,16 @@ namespace FoursquareApp.Client
             // Entry createFolderEntry = dropbox.CreateFolder(newFolderName);
             //Console.WriteLine("Created folder: {0}", createFolderEntry.Path);
 
+            HttpClient client = new HttpClient();
+
+            byte[] imageAsByteArr = client.GetByteArrayAsync(address).Result;
+
+            Entry uplodeImage = dropbox.UploadFile(new ByteArrayResource(imageAsByteArr), "/" + image);
             // Upload a file
-            Entry uploadFileEntry = dropbox.UploadFile(new FileResource("../../TestImages/"+image), "/"+ image);
+            // Entry uploadFileEntry = dropbox.UploadFile(new FileResource("../../TestImages/" + image), "/" + image);
 
             // take url
-            DropboxLink link = dropbox.GetMediaLink(uploadFileEntry.Path);
+            DropboxLink link = dropbox.GetMediaLink(uplodeImage.Path);
             Console.WriteLine(link.Url);
         }
     }

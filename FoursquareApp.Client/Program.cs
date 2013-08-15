@@ -8,6 +8,7 @@ using FoursquareApp.Data;
 using Spring.Social.Dropbox.Connect;
 using Spring.Social.Dropbox.Api;
 
+
 namespace FoursquareApp.Client
 {
     class Program
@@ -17,10 +18,10 @@ namespace FoursquareApp.Client
 
         private const string OAuthTokenFileName = "OAuthTokenFileName.txt";
 
-        static void Main(string[] args)
+        static void Main()
         {
-           // FoursquareContext testContext = new FoursquareContext();
-            
+            // FoursquareContext testContext = new FoursquareContext();
+
             //testContext.Users.Add(new User() { Username = "MegaTest" });
             //testContext.SaveChanges();
 
@@ -34,8 +35,8 @@ namespace FoursquareApp.Client
 
             //Console.WriteLine("WTF!");
 
-            string image = "img1.jpg";
-
+            string image = "img3.jpg";
+            string address = "http://eofdreams.com/data_images/dreams/image/image-09.jpg";
             DropboxProvider dropboxProvider = new DropboxProvider();
 
             DropboxServiceProvider dropboxServiceProvider =
@@ -43,7 +44,7 @@ namespace FoursquareApp.Client
 
             IDropbox dropbox = dropboxProvider.Authenticate(dropboxServiceProvider, dropboxProvider, OAuthTokenFileName);
 
-            dropboxProvider.TakeUrl(dropbox, image);
+            dropboxProvider.TakeUrl(dropbox, image, address);
         }
     }
 }
