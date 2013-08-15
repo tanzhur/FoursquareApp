@@ -40,6 +40,7 @@
         '<button id="btn-create-place" class="btn btn-success">Create place</button>' +
                 '<div class="k-content">' +
             '<div id="main-content">' +
+            '<div id="checkInMessageBox"></div>' +
                 '<div id="tabstrip">' +
                     '<ul>' +
                         '<li class="k-state-active">' +
