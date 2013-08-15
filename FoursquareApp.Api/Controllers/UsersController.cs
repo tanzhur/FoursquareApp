@@ -157,7 +157,7 @@ namespace FoursquareApp.Api.Controllers
             }
             else
             {
-                return this.Request.CreateErrorResponse(HttpStatusCode.Forbidden);
+                return this.Request.CreateErrorResponse(HttpStatusCode.Forbidden, "You can't view all users");
             }
             
         }

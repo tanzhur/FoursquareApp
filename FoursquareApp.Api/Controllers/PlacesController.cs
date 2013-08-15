@@ -111,8 +111,7 @@ namespace FoursquareApp.Api.Controllers
 
                 allPlaceModels.Add(currentModelPlace);
             }
-
-
+            
             User currentUser = usersRepo.All().Where(u => u.SessionKey == sessionKey).FirstOrDefault();
 
             if (currentUser == null)
