@@ -5,13 +5,13 @@
 
 
 var persisters = (function () {
-    var nickname = localStorage.getItem("nickname");
+    var nickname = localStorage.getItem("username");
     var sessionKey = localStorage.getItem("sessionKey");
     function saveUserData(userData) {
-        localStorage.setItem("nickname", userData.nickname);
-        localStorage.setItem("sessionKey", userData.sessionKey);
-        nickname = userData.nickname;
-        sessionKey = userData.sessionKey;
+        localStorage.setItem("username", userData.UserName);
+        localStorage.setItem("sessionKey", userData.SessionKey);
+        nickname = userData.UserName;
+        sessionKey = userData.SessionKey;
     }
     function clearUserData() {
         localStorage.removeItem("nickname");
@@ -40,10 +40,10 @@ var persisters = (function () {
             this.rootUrl = rootUrl + "users/";
         },
         login: function (user, success, error) {
-            var url = this.rootUrl + "login";
+            var url = this.rootUrl + "login/";
             var userData = {
-                username: user.username,
-                authCode: CryptoJS.SHA1(user.username + user.password).toString()
+                Username: user.username,
+                AuthCode: CryptoJS.SHA1(user.username + user.password).toString()
             };
 
             httpRequester.postJson(url, userData,
@@ -53,14 +53,14 @@ var persisters = (function () {
 				}, error);
         },
         register: function (user, success, error) {
-            var url = this.rootUrl + "register";
+            var url = this.rootUrl + "register/";
             var userData = {
                 username: user.username,
-                nickname: user.nickname,
                 authCode: CryptoJS.SHA1(user.username + user.password).toString()
             };
             httpRequester.postJson(url, userData,
 				function (data) {
+				    console.log(data);
 				    saveUserData(data);
 				    success(data);
 				}, error);
@@ -75,6 +75,11 @@ var persisters = (function () {
         getAll: function (success, error) {
             var url = this.rootUrl + "get-all/";
             httpRequester.getJson(url, success, error);
+        },
+
+        checkIn: function (data, success, error) {
+            var url = this.rootUrl + "check-in/" + sessionKey;
+            httpRequester.postJson(url, data, success, error);
         }
     });
 
@@ -82,14 +87,35 @@ var persisters = (function () {
         init: function (rooturl) {
             this.rootUrl = rooturl + 'places/';
         },
+        create: function (data, sucess, error) {
+            var url = this.rooturl + "create/";
+
+            httpRequester.postJson(url, data, sucess, error);
+        },
+
+        getClosest: function (success, error) {
+            var url = this.rootUrl + "get-closest/" + sessionKey;
+            httpRequester.getJson(url, success, error);
+        },
+
+        getAll: function (success, error) {
+            var url = this.rootUrl + "get-all/";
+            httpRequester.getJson(url, sucess, error);
+        },
+
+        getAll: function (success, error) {
+            var url = this.rootUrl + "get-current/" + sessionKey;
+            httpRequester.getJson(url, sucess, error);
+        }
     });
 
     var CommentPersister = Class.create({
         init: function (rooturl) {
             this.rootUrl = rooturl + 'comments/';
         },
-        create: function () {
-
+        create: function (data, success, error) {
+            var url = this.rootUrl + "create/" + sessionKey;
+            httpRequester.postJson(url, data, success, error);
         },
 
         getAll: function (success, error) {

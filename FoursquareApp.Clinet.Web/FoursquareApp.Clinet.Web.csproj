@@ -68,6 +68,8 @@
     <Content Include="scripts\libs\kendo.grid.min.js" />
     <Content Include="scripts\libs\kendo.web.min.js" />
     <Content Include="scripts\persister.js" />
+    <Content Include="scripts\siteController.js" />
+    <Content Include="scripts\ui.js" />
     <Content Include="styles\bootstrap\bootstrap-responsive.css" />
     <Content Include="styles\bootstrap\bootstrap-responsive.min.css" />
     <Content Include="styles\bootstrap\bootstrap.css" />
