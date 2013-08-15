@@ -15,6 +15,11 @@ namespace FoursquareApp.Client
         public DropboxProvider()
         { }
 
+        private const string DropboxAppKey = "qo8v1rcsno3proe";
+        private const string DropboxAppSecret = "y1djbdiyn46560r";
+
+        private const string OAuthTokenFileName = "OAuthTokenFileName.txt";
+
         public OAuthToken LoadOAuthToken(string OAuthTokenFileName)
         {
             string[] lines = File.ReadAllLines(OAuthTokenFileName);
@@ -51,7 +56,7 @@ namespace FoursquareApp.Client
             File.WriteAllLines(OAuthTokenFileName, oauthData);
         }
 
-        public IDropbox Authenticate(DropboxServiceProvider dropboxServiceProvider, DropboxProvider provider, string OAuthTokenFileName)
+        private IDropbox Authenticate(DropboxServiceProvider dropboxServiceProvider, DropboxProvider provider, string OAuthTokenFileName)
         {
             // Authenticate the application (if not authenticated) and load the OAuth token
             if (!File.Exists(OAuthTokenFileName))
@@ -62,12 +67,26 @@ namespace FoursquareApp.Client
 
             // Login in Dropbox
             IDropbox dropbox = dropboxServiceProvider.GetApi(oauthAccessToken.Value, oauthAccessToken.Secret);
+
             return dropbox;
         }
 
-        public void TakeUrl(IDropbox dropbox, string image, string address)
+        public static string AttachToPlace(string image, string address)
         {
+            DropboxProvider dropboxProvider = new DropboxProvider();
 
+            DropboxServiceProvider dropboxServiceProvider =
+            new DropboxServiceProvider(DropboxAppKey, DropboxAppSecret, AccessLevel.AppFolder);
+
+            IDropbox dropbox = dropboxProvider.Authenticate(dropboxServiceProvider, dropboxProvider, OAuthTokenFileName);
+
+            string resultUrl = dropboxProvider.TakeUrl(dropbox, image, address);
+            return resultUrl;
+        }
+
+        private string TakeUrl(IDropbox dropbox, string image, string address)
+        {
+            
             // Create new folder
             // string newFolderName = "Test";
             // Entry createFolderEntry = dropbox.CreateFolder(newFolderName);
@@ -83,7 +102,8 @@ namespace FoursquareApp.Client
 
             // take url
             DropboxLink link = dropbox.GetMediaLink(uplodeImage.Path);
-            Console.WriteLine(link.Url);
+            string url = link.Url;
+            return url;
         }
     }
 }

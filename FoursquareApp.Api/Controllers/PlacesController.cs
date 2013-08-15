@@ -134,5 +134,15 @@ namespace FoursquareApp.Api.Controllers
 
             return this.Request.CreateResponse(HttpStatusCode.OK, resultPlaceModels);
         }
+
+        //[HttpPost]
+        //[ActionName("attach-picture")]
+        //public HttpResponseMessage AttachImageToPlace(string sessionKey, [FromBody] PlaceImageAttach imageInformation)
+        //{
+        //    User currentUser = usersRepo.All().Where(u => u.SessionKey == sessionKey).FirstOrDefault();
+        //    Place currentPlace = placesRepo.All().Where(p => p.Id == imageInformation.PlaceId).FirstOrDefault();
+
+        //   // string currentImageGeneratedUrl = 
+        //}
     }
 }

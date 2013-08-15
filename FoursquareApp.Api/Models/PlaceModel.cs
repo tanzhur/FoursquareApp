@@ -63,4 +63,14 @@ namespace FoursquareApp.Api.Models
 
         public decimal Latitude { get; set; }
     }
+
+    public class PlaceImageAttach
+    {
+        public string ImageUrl { get; set; }
+
+        public string ImageName { get; set; }
+
+        public int PlaceId { get; set; }
+
+    }
 }

@@ -11,12 +11,9 @@ using Spring.Social.Dropbox.Api;
 
 namespace FoursquareApp.Client
 {
-    class Program
+    public class Program
     {
-        private const string DropboxAppKey = "qo8v1rcsno3proe";
-        private const string DropboxAppSecret = "y1djbdiyn46560r";
-
-        private const string OAuthTokenFileName = "OAuthTokenFileName.txt";
+       
 
         static void Main()
         {
@@ -36,15 +33,10 @@ namespace FoursquareApp.Client
             //Console.WriteLine("WTF!");
 
             string image = "img3.jpg";
-            string address = "http://eofdreams.com/data_images/dreams/image/image-09.jpg";
-            DropboxProvider dropboxProvider = new DropboxProvider();
+            string address = "http://t3.gstatic.com/images?q=tbn:ANd9GcRKZhVfP7IJlgWw70_yZjTXdplh5lQiXfTLctlicL2w3p3b0ESVVg";
 
-            DropboxServiceProvider dropboxServiceProvider =
-            new DropboxServiceProvider(DropboxAppKey, DropboxAppSecret, AccessLevel.AppFolder);
-
-            IDropbox dropbox = dropboxProvider.Authenticate(dropboxServiceProvider, dropboxProvider, OAuthTokenFileName);
-
-            dropboxProvider.TakeUrl(dropbox, image, address);
+            string url = DropboxProvider.AttachToPlace(image, address);
+            Console.WriteLine(url);
         }
     }
 }
