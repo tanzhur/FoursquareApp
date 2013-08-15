@@ -159,8 +159,19 @@ namespace FoursquareApp.Api.Controllers
         [ActionName("check-in")]
         public HttpResponseMessage CheckInPlace(string sessionKey,[FromBody]string PlaceId)
         {
+            int id = 0;
+            
+            try
+            {
+               id = int.Parse(PlaceId);
+            }
+            catch (Exception ex)
+            {
+                return this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.InnerException.ToString());
+            }
+
             User currentUser = userRepo.All().Where(u => u.SessionKey == sessionKey).FirstOrDefault();
-           
+
             Place currentPlace = placeRepo.All().Where(p => p.Id == id).FirstOrDefault();
             
             if (currentUser == null || currentPlace == null)

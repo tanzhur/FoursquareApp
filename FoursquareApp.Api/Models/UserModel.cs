@@ -25,6 +25,8 @@ namespace FoursquareApp.Api.Models
         [DataMember]
         public List<String> Places { get; set; }
 
+        [DataMember]
+        public int CurrentPlaceId { get; set; }
         public UserModel(User user)
         {
             this.Id = user.Id;
@@ -32,6 +34,7 @@ namespace FoursquareApp.Api.Models
             this.Password = user.Password;
             this.SessionKey = user.SessionKey;
             this.Places = new List<string>();
+            this.CurrentPlaceId = user.currentPlaceId;
 
             foreach (Place currentPlace in user.Places)
             {
