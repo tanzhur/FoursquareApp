@@ -286,7 +286,7 @@ var controllers = (function () {
                                             width: 300
                                         }).data("kendoWindow");
 
-                                    wnd.content(ui.buildUpload() + '<div id="hidden-data" data-place-id="' + currentPlace.Id + '"></div>');
+                                    wnd.content(ui.buildUpload() + '<div id="hidden-data-upload-image" data-place-id="' + currentPlace.Id + '"></div>');
                                     wnd.center().open();
                                 }
                             }
@@ -368,6 +368,18 @@ var controllers = (function () {
         attachUIEventHandlers: function (selector) {
             var wrapper = $(selector);
             var self = this;
+
+            $("body").on("click", "#submit-url", function () {
+                var imageName = $("#image-name").val();
+                var imageUrl = $("#image-url").val();
+                var PlaceID = $("#hidden-data-upload-image").data("place-id");
+
+                var ImageRegisterModel = {
+                    ImageName: imageName,
+                    ImageUrl: imageUrl,
+                    PlaceId: PlaceID
+                };
+            });
             $("body").on("click", "#submit-comment", function () {
                 
                 

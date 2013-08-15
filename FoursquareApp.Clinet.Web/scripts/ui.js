@@ -118,7 +118,8 @@
     function buildUploadForm() {
         var html = "";
         html += '<h4>Upload image</h4>' +
-                '<textarea id="link-url"></textarea>' +
+                '<span> Image link : </span><input type="text" id="link-url" /><br />' +
+                '<span> Image name : </span><input type="text" id="image-name" />' +
                 '<button id="submit-url" class="btn btn-success">Upload image</button>';
 
         return html;
