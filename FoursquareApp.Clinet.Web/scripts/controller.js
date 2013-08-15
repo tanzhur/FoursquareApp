@@ -7,12 +7,8 @@
 
 var controllers = (function () {
     //local check
-    var baseUrl = "http://localhost:6514/api/";
-    //var baseUrl = "http://foursquareapp.apphb.com/api/";
-
-    function uploadImages() {
-        alert("Working");
-    };
+    //var baseUrl = "http://localhost:6514/api/";
+    var baseUrl = "http://foursquareapp.apphb.com/api/";
 
     var Controller = Class.create({
         init: function () {
@@ -136,7 +132,7 @@ var controllers = (function () {
                 if (!window.data("kendoWindow")) {
                     window.kendoWindow({
                         width: "260px",
-                        actions: ["Minimize", "Maximize", "Close"],
+                        actions: ["Close"],
                         title: "Add new place.",
                         close: function () {
                             undo.show();
@@ -185,13 +181,41 @@ var controllers = (function () {
                         width: 120,
                         title: "Images"
                     }, {
-                        command: {
-                            text: "Check In !",
-                            click: asd = function () {
-                                alert('asd');
-                            }
-                        },
-                        title: "Check in",
+                        command:
+                            {
+                                text: "Check Me",
+                                click: function (e) {
+                                    e.preventDefault();
+
+                                    var currentPlace = this.dataItem($(e.currentTarget).closest("tr"));
+
+                                    var wnd = $("#checkInBox")
+                                       .kendoWindow({
+                                           title: "Information",
+                                           modal: true,
+                                           visible: false,
+                                           resizable: false,
+                                           width: 300
+                                       }).data("kendoWindow");
+
+                                    self.persister.user.checkIn(currentPlace.Id, function () {
+                                        wnd.content("You successfully have checked here !");
+                                        wnd.center().open();
+
+                                        setTimeout(function () {
+                                            wnd.center().close();
+                                        }, 1500);
+                                    }, function () {
+                                        wnd.content("An error has occured !");
+                                        wnd.center().open();
+
+                                        setTimeout(function () {
+                                            wnd.center().close();
+                                        }, 1500);
+                                    });
+                                }
+                            },
+                        title: "Check In",
                         width: 120
                     }
                     ]
