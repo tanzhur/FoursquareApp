@@ -7,15 +7,25 @@
 var persisters = (function () {
     var nickname = localStorage.getItem("username");
     var sessionKey = localStorage.getItem("sessionKey");
+    var latitude = localStorage.getItem("lat");
+    var longtitude = localStorage.getItem("lon");
     function saveUserData(userData) {
         localStorage.setItem("username", userData.UserName);
         localStorage.setItem("sessionKey", userData.SessionKey);
+        localStorage.setItem("lat", userData.Latitude);
+        localStorage.setItem("lon", userData.Longitude);
+        latitude = userData.Latitude;
+        longtitude = userData.Longitude;
         nickname = userData.UserName;
         sessionKey = userData.SessionKey;
     }
     function clearUserData() {
         localStorage.removeItem("nickname");
         localStorage.removeItem("sessionKey");
+        localStorage.removeItem("lat");
+        localStorage.removeItem("lon");
+        longtitude = "";
+        latitude = "";
         nickname = "";
         sessionKey = "";
     }
@@ -33,6 +43,12 @@ var persisters = (function () {
         },
         nickname: function () {
             return nickname;
+        },
+        latitude: function () {
+            return latitude;
+        },
+        longtitude: function () {
+            return longtitude;
         }
     });
     var UserPersister = Class.create({
@@ -54,10 +70,15 @@ var persisters = (function () {
         },
         register: function (user, success, error) {
             var url = this.rootUrl + "register/";
+            console.log(user);
             var userData = {
                 username: user.username,
-                authCode: CryptoJS.SHA1(user.username + user.password).toString()
+                authCode: CryptoJS.SHA1(user.username + user.password).toString(),
+                Latitude: user.latitude,
+                Longitude: user.longitude
             };
+
+            console.log(userData);
             httpRequester.postJson(url, userData,
 				function (data) {
 				    console.log(data);

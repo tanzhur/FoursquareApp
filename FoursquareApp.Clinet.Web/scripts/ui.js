@@ -26,9 +26,15 @@
         return html;
     }
 
-    function buildAppUI(nickname) {
+    function buildAppUI(nickname, lan, lat) {
         var html = '<p class="text-info">' +
 				nickname +
+		'</p>' +
+        '<p class="text-info">' +
+				lan +
+		'</p>' +
+        '<p class="text-info">' +
+				lat +
 		'</p>' +
 		'<button id="btn-logout" class="btn btn-danger">Logout</button><br/>' + 
                 '<div class="k-content">'+

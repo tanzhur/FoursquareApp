@@ -26,7 +26,10 @@ var controllers = (function () {
             $(selector).html(loginFormHtml);
         },
         loadAppUI: function (selector) {
-            $(selector).html(ui.appUI(this.persister.nickname()));
+            $(selector).html(ui.appUI(
+                this.persister.nickname(),
+                this.persister.latitude(),
+                this.persister.longtitude()));
             this.loadTabScript();
             this.showClosest();
         },
@@ -46,16 +49,16 @@ var controllers = (function () {
         showClosest: function () {
             self = this;
             $(document).ready(function () {
-                    $("#all").kendoGrid({
-                        dataSource: {
-                            transport: {
-                                read: {
-                                    url: self.persister.place.getClosestService(),
-                                    dataType: "json"
-                                }
-                            },
-                            pageSize: 10,
+                $("#all").kendoGrid({
+                    dataSource: {
+                        transport: {
+                            read: {
+                                url: self.persister.place.getClosestService(),
+                                dataType: "json"
+                            }
                         },
+                        pageSize: 10,
+                    },
                 }, function () {
 
                 });
@@ -93,15 +96,39 @@ var controllers = (function () {
                 return false;
             });
             wrapper.on("click", "#btn-register", function () {
-                var user = {
-                    username: $(selector).find("#tb-register-username").val(),
-                    password: $(selector + " #tb-register-password").val()
+
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        var user = {
+                            username: $(selector).find("#tb-register-username").val(),
+                            password: $(selector + " #tb-register-password").val(),
+                            longitude: position.coords.latitude,
+                            latitude: position.coords.longitude
+                        }
+
+                        self.persister.user.register(user, function () {
+                            self.loadAppUI(selector);
+                        }, function (err) {
+                            wrapper.find("#error-messages").text(err.responseJSON.Message);
+                        });
+
+                    }, function () {
+                        var user = {
+                            username: $(selector).find("#tb-register-username").val(),
+                            password: $(selector + " #tb-register-password").val(),
+                        }
+
+                        self.persister.user.register(user, function () {
+                            self.loadAppUI(selector);
+                        }, function (err) {
+                            wrapper.find("#error-messages").text(err.responseJSON.Message);
+                        });
+                    });
                 }
-                self.persister.user.register(user, function () {
-                    self.loadAppUI(selector);
-                }, function (err) {
-                    wrapper.find("#error-messages").text(err.responseJSON.Message);
-                });
+                else {
+                    $("#btn-register").append("Geolocation is not supported by this browser.");
+                }
+
                 return false;
             });
             wrapper.on("click", "#btn-logout", function () {
