@@ -8,8 +8,8 @@
 
 var controllers = (function () {
     //local check
-    var baseUrl = "http://localhost:6514/api/";
-    //var baseUrl = "http://foursquareapp.apphb.com/api/";
+    //var baseUrl = "http://localhost:6514/api/";
+    var baseUrl = "http://foursquareapp.apphb.com/api/";
 
     var Controller = Class.create({
         init: function () {
@@ -379,10 +379,15 @@ var controllers = (function () {
                     ImageUrl: imageUrl,
                     PlaceId: PlaceID
                 };
+
+                self.persister.image.attach(ImageRegisterModel, function () {
+                    console.log("Successfully uploaded !");
+                }, function (error) {
+                    console.log(error);
+                });
             });
             $("body").on("click", "#submit-comment", function () {
-                
-                
+                    
                 var commentContent = $("#comment-content").val();
                 var id = $("#hidden-data").data("place-id");
 
