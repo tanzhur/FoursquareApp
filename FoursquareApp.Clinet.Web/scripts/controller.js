@@ -50,7 +50,7 @@ var controllers = (function () {
         },
 
         uploadImages: function () {
-    
+            //alert("Working");
         },
 
         loadCommentsTabContent: function () {
@@ -98,6 +98,9 @@ var controllers = (function () {
 
         loadPlacesTabContent: function () {
             self = this;
+
+           
+
             $(document).ready(function () {
                 $("#close").kendoGrid({
                     dataSource: {
@@ -137,7 +140,7 @@ var controllers = (function () {
                         title: "Images"
                     }, {
                         command: {
-                            text: "View Details",
+                            text: "Check In !",
                             click: self.uploadImages
                         },
                         title: " ",
