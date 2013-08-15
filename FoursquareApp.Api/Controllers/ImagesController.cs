@@ -54,5 +54,26 @@ namespace FoursquareApp.Api.Controllers
             imagesRepo.Add(new Image() { Url = url, PlaceId = currentPlace.Id });
             return this.Request.CreateResponse(HttpStatusCode.Created, url);
         }
+
+        [HttpPost]
+        [ActionName("get-all-pictures")]
+        public HttpResponseMessage GetAllPictures([FromBody]int? PlaceId)
+        {
+            ICollection<string> allPicturesLinks = new List<string>();
+
+            Place currentPlace = placesRepo.All().Where(p => p.Id == PlaceId).FirstOrDefault();
+
+            if (currentPlace == null)
+            {
+                return this.Request.CreateErrorResponse(HttpStatusCode.NotFound, "Place not found");
+            }
+
+            foreach (Image currentImage in currentPlace.Images)
+            {
+                allPicturesLinks.Add(currentImage.Url);
+            }
+
+            return this.Request.CreateResponse(HttpStatusCode.OK, allPicturesLinks);
+        }
     }
 }
