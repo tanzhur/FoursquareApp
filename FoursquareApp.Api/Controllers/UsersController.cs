@@ -58,7 +58,7 @@ namespace FoursquareApp.Api.Controllers
 
         private void SendPubnubMessage(UserPlaceModel item)
         {
-            this.pubnub.Publish(this.channel, JsonConvert.SerializeObject(item));
+            this.pubnub.Publish(this.channel, item);
         }
 
         [HttpPost]
