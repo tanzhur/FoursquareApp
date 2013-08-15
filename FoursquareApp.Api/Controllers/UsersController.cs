@@ -60,7 +60,12 @@ namespace FoursquareApp.Api.Controllers
         {
             this.pubnub.Publish(this.channel, item);
         }
-
+        // AttachImage(int PlaceID)
+        /*
+         * {
+         *  Place currentPlace = placeRepo.All().Where(p => p.Id == PlaceId).FirstOrDefault();
+         * }
+         */
         [HttpPost]
         [ActionName("register")]
         public HttpResponseMessage RegisterUser([FromBody]UserRegisterModel inputUser)

@@ -27,6 +27,13 @@ namespace FoursquareApp.Api.Models
 
         [DataMember]
         public int CurrentPlaceId { get; set; }
+
+        [DataMember]
+        public decimal Longitude { get; set; }
+
+        [DataMember]
+        public decimal Latitude { get; set; }
+        
         public UserModel(User user)
         {
             this.Id = user.Id;
@@ -35,6 +42,8 @@ namespace FoursquareApp.Api.Models
             this.SessionKey = user.SessionKey;
             this.Places = new List<string>();
             this.CurrentPlaceId = user.currentPlaceId;
+            this.Longitude = user.Longitude;
+            this.Latitude = user.Latitude;
 
             foreach (Place currentPlace in user.Places)
             {
