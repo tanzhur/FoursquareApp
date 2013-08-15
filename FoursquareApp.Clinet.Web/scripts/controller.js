@@ -10,6 +10,10 @@ var controllers = (function () {
     var baseUrl = "http://localhost:6514/api/";
     //var baseUrl = "http://foursquareapp.apphb.com/api/";
 
+    function uploadImages() {
+        alert("Working");
+    };
+
     var Controller = Class.create({
         init: function () {
             this.persister = persisters.get(baseUrl);
@@ -33,9 +37,20 @@ var controllers = (function () {
                 this.persister.nickname(),
                 this.persister.latitude(),
                 this.persister.longtitude()));
+            this.loadPubNubScripts();
             this.loadPlacesTabContent(selector);
             this.loadTabScript();
             this.loadCommentsTabContent();
+        },
+
+        loadPubNubScripts: function () {
+            PUBNUB.subscribe({
+                channel: "userplaces-channel",
+                callback: function (message) {
+                    // Received a message --> print it in the page
+                    $("#pub-nub").innerHTML += message.User.Username + " has checked in " + message.Place.Name + " !" + '\n';
+                }
+            });
         },
 
         loadTabScript: function () {
@@ -48,10 +63,6 @@ var controllers = (function () {
                     }
                 });
             });
-        },
-
-        uploadImages: function () {
-            alert("Working");
         },
 
 
@@ -136,6 +147,7 @@ var controllers = (function () {
 
             // Grid generation for places
             $(document).ready(function () {
+
                 $("#close").kendoGrid({
                     dataSource: {
                         transport: {
@@ -175,7 +187,9 @@ var controllers = (function () {
                     }, {
                         command: {
                             text: "Check In !",
-                            click: self.uploadImages()
+                            click: asd = function () {
+                                alert('asd');
+                            }
                         },
                         title: "Check in",
                         width: 120

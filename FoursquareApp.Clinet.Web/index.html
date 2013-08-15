@@ -21,6 +21,17 @@
     <script src="scripts/siteController.js"></script>
 </head>
 <body>
-    <div id="content"></div>
+    <div class="span12"
+        pub-key="pub-c-dc19a1e8-4dd2-4c2d-8099-1f73b901d609"
+        sub-key="sub-c-abf55e18-0580-11e3-991c-02ee2ddab7fe"
+        ssl="off" origin="pubsub.pubnub.com" id="pubnub">
+    </div>
+    <div class="row-fluid">
+        <div id="content" class="span9"></div>
+        <div id="pub-nub" class="span3 container-fluid">
+            <h4>PubNub</h4>
+        </div>
+        <script src="http://cdn.pubnub.com/pubnub-3.5.3.min.js"></script>
+    </div>
 </body>
 </html>

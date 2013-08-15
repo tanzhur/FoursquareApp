@@ -2,7 +2,7 @@
 
     function buildLoginForm() {
         var html =
-            '<div id="login-form-holder" class="row span3 offset5">' +
+            '<div id="login-form-holder" class="row-fluid span3 offset6">' +
 				'<form>' +
 					'<div id="login-form">' +
 						'<label for="tb-login-username">Username: </label>' +
@@ -36,8 +36,10 @@
         '<p class="text-info">' +
 				lat +
 		'</p>' +
-		'<button id="btn-logout" class="btn btn-danger">Logout</button>' +
-        '<button id="btn-create-place" class="btn btn-success">Create place</button>' +
+        '<div class="row-fluid">' +
+		'<button id="btn-logout" class="btn btn-danger span1">Logout</button>' +
+        '<button id="btn-create-place" class="btn btn-success span2">Create place</button>' +
+        '</div>' +
                 '<div class="k-content">' +
             '<div id="main-content">' +
                 '<div id="tabstrip">' +
