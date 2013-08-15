@@ -159,35 +159,33 @@ namespace FoursquareApp.Api.Controllers
         [ActionName("check-in")]
         public HttpResponseMessage CheckInPlace(string sessionKey,[FromBody]string PlaceId)
         {
-
-            int id = int.Parse(PlaceId);
-
             User currentUser = userRepo.All().Where(u => u.SessionKey == sessionKey).FirstOrDefault();
+           
             Place currentPlace = placeRepo.All().Where(p => p.Id == id).FirstOrDefault();
-
+            
             if (currentUser == null || currentPlace == null)
             {
                 return this.Request.CreateErrorResponse(HttpStatusCode.NotFound, "User or Place wasn't found");
             }
 
-            if (currentUser.currentPlaceId == 0)
-            {
-                currentUser.currentPlaceId = currentPlace.Id;
-                userRepo.Update(currentUser.Id, currentUser);
-            }
-            else if (currentUser.currentPlaceId != currentPlace.Id)
-            {
-                currentUser.currentPlaceId = currentPlace.Id;
-                userRepo.Update(currentUser.Id, currentUser);    
-            }
-
-            currentUser.Places.Add(currentPlace);
-            currentPlace.Users.Add(currentUser);
-
+            currentUser.currentPlaceId = currentPlace.Id;
             userRepo.Update(currentUser.Id, currentUser);
-            placeRepo.Update(currentPlace.Id, currentPlace);
 
-            return this.Request.CreateResponse(HttpStatusCode.OK);
+            // EVENT SUBSCRIPTION
+
+            //var subscribedUsers = userRepo.All().Where(u => u.currentPlaceId == PlaceId && u.Username != currentUser.Username);
+
+            //foreach (User subsribedUser in subscribedUsers)
+            //{
+            //    subsribedUser.SendMessage(
+            //        "User" + currentUser.Username + "has checked in " + currentPlace.Name;
+            //    );
+            //}
+            /// PubNub
+            /// Send to all users, where u => u.currentPlaceId == PlaceId && u.Username != currentUser.Username
+            /// Message : currentUser.Username has Checked in currentPlace.Name
+
+            return this.Request.CreateResponse(HttpStatusCode.OK, string.Format("You successfully checked in : {0} !", currentPlace.Name));
         }
 
     }
