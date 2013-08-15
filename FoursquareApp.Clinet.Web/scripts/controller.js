@@ -422,6 +422,8 @@ var controllers = (function () {
                 return false;
             });
             wrapper.on("click", "#btn-logout", function () {
+                $("#pn-messages").remove();
+                $("#pub-nub h4").remove();
                 self.persister.user.logout(function () {
                     self.loadLoginFormUI(selector);
                 }, function (err) {
