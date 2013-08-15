@@ -26,7 +26,8 @@ namespace FoursquareApp.Api.Controllers
         [ActionName("create")]
         public HttpResponseMessage CreatePlace(string sessionKey, [FromBody] PlaceModelRegister place)
         {
-            Place existingPlace = placesRepo.All().Where(p => p.Longitude == place.Longitude && p.Longitude == place.Longitude).FirstOrDefault();
+            Place existingPlace = placesRepo.All().Where(p => p.Longitude == place.Longitude && p.Latitude == place.Latitude).FirstOrDefault();
+            
             if (existingPlace != null)
             {
                 return this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, "This place already exists.");
@@ -125,7 +126,7 @@ namespace FoursquareApp.Api.Controllers
             foreach (Place currentPlace in allPlaces)
             {
                 if (Math.Abs(currentUser.Longitude - currentPlace.Longitude) <= 1 && 
-                        Math.Abs(currentUser.Latitude - currentPlace.Longitude) <= 1)
+                        Math.Abs(currentUser.Latitude - currentPlace.Latitude) <= 1)
                 {
                     PlaceModel currentPlaceModel = new PlaceModel(currentPlace);
 
