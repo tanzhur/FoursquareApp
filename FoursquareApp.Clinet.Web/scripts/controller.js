@@ -447,6 +447,25 @@ var controllers = (function () {
 
                 return false;
             });
+
+            $("body").on("click", "#submit-comment", function () {
+
+
+                var commentContent = $("#comment-content").val();
+                var id = $("#hidden-data").data("place-id");
+
+                var commentRegisterModel = {
+                    PlaceId: id,
+                    Content: commentContent
+                };
+
+                self.persister.comment.create(commentRegisterModel, function () {
+                    self.loadAppUI();
+                }, function () {
+                });
+
+            });
+
             wrapper.on("click", "#btn-logout", function () {
                 $("#pn-messages").remove();
                 $("#pub-nub h4").remove();

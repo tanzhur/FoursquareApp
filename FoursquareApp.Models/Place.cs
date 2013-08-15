@@ -12,7 +12,7 @@ namespace FoursquareApp.Models
         {
             this.Comments = new HashSet<Comment>();
             this.Users = new HashSet<User>();
-            this.Images = new HashSet<string>();
+            this.Images = new HashSet<Image>();
         }
 
         public int Id { get; set; }
@@ -23,7 +23,7 @@ namespace FoursquareApp.Models
 
         public decimal Latitude { get; set; }
 
-        public HashSet<string> Images { get; set; }
+        public virtual ICollection<Image> Images { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
 

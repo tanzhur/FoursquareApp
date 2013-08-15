@@ -18,13 +18,15 @@ namespace FoursquareApp.Api.Resolvers
         private IRepository<Place> placesRepo;
         private IRepository<Comment> commentsRepo;
         private IRepository<User> usersRepo;
+        private IRepository<Image> imageRepo;
 
         public DbDependencyResolver()
         {
-            dbContext = new FoursquareContext();
-            placesRepo = new EfRepository<Place>(dbContext);
-            commentsRepo = new EfRepository<Comment>(dbContext);
-            usersRepo = new EfRepository<User>(dbContext);
+            this.dbContext = new FoursquareContext();
+            this.placesRepo = new EfRepository<Place>(dbContext);
+            this.commentsRepo = new EfRepository<Comment>(dbContext);
+            this.usersRepo = new EfRepository<User>(dbContext);
+            this.imageRepo = new EfRepository<Image>(dbContext);
         }
 
         public IDependencyScope BeginScope()
@@ -45,6 +47,10 @@ namespace FoursquareApp.Api.Resolvers
             else if(serviceType == typeof(CommentsController))
             {
                 return new CommentsController(commentsRepo, usersRepo, placesRepo);
+            }
+            else if(serviceType == typeof(ImagesController))
+            {
+                return new ImagesController(imageRepo, usersRepo, placesRepo);
             }
             else
             {

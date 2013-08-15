@@ -136,35 +136,5 @@ namespace FoursquareApp.Api.Controllers
 
             return this.Request.CreateResponse(HttpStatusCode.OK, resultPlaceModels);
         }
-
-        [HttpPost]
-        [ActionName("attach-picture")]
-        public HttpResponseMessage AttachImageToPlace(string sessionKey, [FromBody] PlaceImageAttach imageInformation)
-        {
-            User currentUser = usersRepo.All().Where(u => u.SessionKey == sessionKey).FirstOrDefault();
-            if (currentUser == null)
-            {
-                return this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Session key and user don't match");
-            }
-
-            Place currentPlace = placesRepo.All().Where(p => p.Id == imageInformation.PlaceId).FirstOrDefault();
-            if (currentPlace == null)
-            {
-                return this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, "The place does not exist!");
-            }
-            string url = "";
-            try
-            {
-
-                url = DropboxProvider.AttachToPlace(imageInformation.ImageName, imageInformation.ImageUrl);
-            }
-            catch (Exception ex)
-            {
-                return this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.InnerException.ToString());
-            }
-            url = DropboxProvider.AttachToPlace(imageInformation.ImageName, imageInformation.ImageUrl);
-            currentPlace.Images.Add(url);
-            return this.Request.CreateResponse(HttpStatusCode.Created, url);
-        }
     }
 }
