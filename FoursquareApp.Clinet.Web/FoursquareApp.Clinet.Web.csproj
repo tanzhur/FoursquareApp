@@ -74,6 +74,15 @@
     <Content Include="styles\bootstrap\bootstrap-responsive.min.css" />
     <Content Include="styles\bootstrap\bootstrap.css" />
     <Content Include="styles\bootstrap\bootstrap.min.css" />
+    <Content Include="styles\kendo\Default\editor.png" />
+    <Content Include="styles\kendo\Default\imagebrowser.png" />
+    <Content Include="styles\kendo\Default\loading-image.gif" />
+    <Content Include="styles\kendo\Default\loading.gif" />
+    <Content Include="styles\kendo\Default\loading_2x.gif" />
+    <Content Include="styles\kendo\Default\slider-h.gif" />
+    <Content Include="styles\kendo\Default\slider-v.gif" />
+    <Content Include="styles\kendo\Default\sprite.png" />
+    <Content Include="styles\kendo\Default\sprite_2x.png" />
     <Content Include="styles\kendo\kendo.common.min.css" />
     <Content Include="styles\kendo\kendo.default.min.css" />
     <Content Include="styles\main-style.css" />

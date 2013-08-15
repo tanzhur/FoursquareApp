@@ -46,6 +46,10 @@ var controllers = (function () {
             });
         },
 
+        uploadImages: function () {
+    
+        },
+
         loadPlacesTabContent: function () {
             self = this;
             $(document).ready(function () {
@@ -86,10 +90,13 @@ var controllers = (function () {
                         width: 120,
                         title: "Images"
                     }, {
-                        field: "CheckIn",
-                        width: 120,
-                        title: "Check In"
-                    },
+                        command: {
+                            text: "View Details",
+                            click: self.uploadImages
+                        },
+                        title: " ",
+                        width: 120
+                    }
                     ]
                 });
 
