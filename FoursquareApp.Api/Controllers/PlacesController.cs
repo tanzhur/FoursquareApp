@@ -151,8 +151,16 @@ namespace FoursquareApp.Api.Controllers
             {
                 return this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, "The place does not exist!");
             }
+            string url = "";
+            try
+            {
 
-            string url = DropboxProvider.AttachToPlace(imageInformation.ImageName, imageInformation.ImageUrl);
+                url = DropboxProvider.AttachToPlace(imageInformation.ImageName, imageInformation.ImageUrl);
+            }
+            catch (Exception ex)
+            {
+                return this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.InnerException.ToString());
+            }
             return this.Request.CreateResponse(HttpStatusCode.OK, url);
         }
     }
