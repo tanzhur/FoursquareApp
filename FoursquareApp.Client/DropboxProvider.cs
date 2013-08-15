@@ -53,12 +53,7 @@ namespace FoursquareApp.Client
 
         private IDropbox Authenticate(DropboxServiceProvider dropboxServiceProvider, DropboxProvider provider, string OAuthTokenFileName)
         {
-            // Authenticate the application (if not authenticated) and load the OAuth token
-            if (!File.Exists(OAuthTokenFileName))
-            {
-                provider.AuthorizeAppOAuth(dropboxServiceProvider, OAuthTokenFileName);
-            }
-            OAuthToken oauthAccessToken = provider.LoadOAuthToken(OAuthTokenFileName);
+            OAuthToken oauthAccessToken = new OAuthToken("ng8ydj1aoljno9fk", "fyqdn9sv71fn8on");
 
             // Login in Dropbox
             IDropbox dropbox = dropboxServiceProvider.GetApi(oauthAccessToken.Value, oauthAccessToken.Secret);
