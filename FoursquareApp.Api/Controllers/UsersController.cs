@@ -10,19 +10,20 @@ using System.Text;
 using System.Security.Cryptography;
 using FoursquareApp.Api.Models;
 using FoursquareApp.Api.InternalControllers;
+using System.Configuration;
 
 namespace FoursquareApp.Api.Controllers
 {
     public class UsersController : ApiController
     {
-
+        
         private const string SessionKeyChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         private const int SessionKeyLen = 50;
         protected static Random rand = new Random();
 
         private IRepository<User> userRepo;
         private IRepository<Place> placeRepo;
-        /// Constructor
+        
         public UsersController(IRepository<User> inputUserRepo, IRepository<Place> inputPlaceRepo)
         {
             this.userRepo = inputUserRepo;
@@ -47,8 +48,6 @@ namespace FoursquareApp.Api.Controllers
             return sessionKey;
         }
 
-        /// Public methods for requests
-        /// http://appname/api/users/register
         [HttpPost]
         [ActionName("register")]
         public HttpResponseMessage RegisterUser([FromBody]UserRegisterModel inputUser)
@@ -143,43 +142,41 @@ namespace FoursquareApp.Api.Controllers
         [ActionName("get-all")]
         public HttpResponseMessage AllUsers()
         {
-            var allUsers = userRepo.All().ToList();
-
-            ICollection<UserModel> resultUsers = new List<UserModel>();
-
-            foreach (User user in allUsers)
+            if (ConfigurationManager.AppSettings["get-all-users"] == "true")
             {
-                resultUsers.Add(new UserModel(user));
-            }
+                var allUsers = userRepo.All().ToList();
 
-            return this.Request.CreateResponse(HttpStatusCode.OK, resultUsers);
+                ICollection<UserModel> resultUsers = new List<UserModel>();
+
+                foreach (User user in allUsers)
+                {
+                    resultUsers.Add(new UserModel(user));
+                }
+
+                return this.Request.CreateResponse(HttpStatusCode.OK, resultUsers);
+            }
+            else
+            {
+                return this.Request.CreateErrorResponse(HttpStatusCode.Forbidden);
+            }
+            
         }
 
         [HttpPost]
         [ActionName("check-in")]
-        public HttpResponseMessage CheckInPlace(string sessionKey,[FromBody]string PlaceId)
+        public HttpResponseMessage CheckInPlace(string sessionKey,[FromBody]int? PlaceId)
         {
-            int id = 0;
-            
-            try
-            {
-               id = int.Parse(PlaceId);
-            }
-            catch (Exception ex)
-            {
-                return this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.InnerException.ToString());
-            }
-
             User currentUser = userRepo.All().Where(u => u.SessionKey == sessionKey).FirstOrDefault();
 
-            Place currentPlace = placeRepo.All().Where(p => p.Id == id).FirstOrDefault();
+            Place currentPlace = placeRepo.All().Where(p => p.Id == PlaceId).FirstOrDefault();
             
             if (currentUser == null || currentPlace == null)
             {
-                return this.Request.CreateErrorResponse(HttpStatusCode.NotFound, "User or Place wasn't found");
+                return this.Request.CreateErrorResponse(HttpStatusCode.NotFound, "User or Place wasn't found.");
             }
 
             currentUser.currentPlaceId = currentPlace.Id;
+
             userRepo.Update(currentUser.Id, currentUser);
 
             // EVENT SUBSCRIPTION
