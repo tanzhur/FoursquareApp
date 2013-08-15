@@ -7,6 +7,7 @@ using System.Web.Http;
 using FoursquareApp.Models;
 using FoursquareApp.Repos;
 using FoursquareApp.Api.Models;
+using FoursquareApp.Client;
 
 namespace FoursquareApp.Api.Controllers
 {
@@ -135,14 +136,24 @@ namespace FoursquareApp.Api.Controllers
             return this.Request.CreateResponse(HttpStatusCode.OK, resultPlaceModels);
         }
 
-        //[HttpPost]
-        //[ActionName("attach-picture")]
-        //public HttpResponseMessage AttachImageToPlace(string sessionKey, [FromBody] PlaceImageAttach imageInformation)
-        //{
-        //    User currentUser = usersRepo.All().Where(u => u.SessionKey == sessionKey).FirstOrDefault();
-        //    Place currentPlace = placesRepo.All().Where(p => p.Id == imageInformation.PlaceId).FirstOrDefault();
+        [HttpPost]
+        [ActionName("attach-picture")]
+        public HttpResponseMessage AttachImageToPlace(string sessionKey, [FromBody] PlaceImageAttach imageInformation)
+        {
+            User currentUser = usersRepo.All().Where(u => u.SessionKey == sessionKey).FirstOrDefault();
+            if (currentUser == null)
+            {
+                return this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Session key and user don't match");
+            }
 
-        //   // string currentImageGeneratedUrl = 
-        //}
+            Place currentPlace = placesRepo.All().Where(p => p.Id == imageInformation.PlaceId).FirstOrDefault();
+            if (currentPlace == null)
+            {
+                return this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, "The place does not exist!");
+            }
+
+            string url = DropboxProvider.AttachToPlace(imageInformation.ImageName, imageInformation.ImageUrl);
+            return this.Request.CreateResponse(HttpStatusCode.OK, url);
+        }
     }
 }

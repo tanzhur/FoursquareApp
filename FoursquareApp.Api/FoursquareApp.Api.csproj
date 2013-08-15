@@ -310,6 +310,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FoursquareApp.Client\FoursquareApp.Client.csproj">
+      <Project>{858fc312-eecd-4712-b73f-ebd1b30dd06d}</Project>
+      <Name>FoursquareApp.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FoursquareApp.Data\FoursquareApp.Data.csproj">
       <Project>{2b37a51a-8f64-4593-a35b-0b27c5a892c4}</Project>
       <Name>FoursquareApp.Data</Name>
