@@ -78,8 +78,12 @@
     function buildAddPlaceWindow() {
         var html = '<div id="add-form" class="k-content">' +
             '<div id="window">' +
-                '<p>In 1903, he founded with architects Koloman Moser and Joseph Maria Olbrich, the Wiener Werkst&auml;tte for decorative arts.</p>' +
-                '<p>They aspired to the renaissance of the arts and crafts and to bring more abstract and purer forms to the designs of buildings and furniture, glass and metalwork, following the concept of total work of art</p>' +
+                '<h4> Create a new place right at this spot !</h4>' +
+                '<form action="/api/places/create/"'+   +' method="POST" >' +
+                    '<span> Name : <input type="text" /> ' +
+                    '<input type="submit" value="Create" class="btn btn-success"/>    '
+                '</form>' +
+                '<div id="error-handler"></div>'+
                 '</div>';
         return html;
     }

@@ -123,7 +123,7 @@ var controllers = (function () {
                 if (!window.data("kendoWindow")) {
                     window.kendoWindow({
                         width: "500px",
-                        actions: ["Minimize", "Maximize", "Close"],
+                        actions: ["Close"],
                         title: "Add new place.",
                         close: function () {
                             undo.show();
