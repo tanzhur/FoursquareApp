@@ -36,7 +36,8 @@
         '<p class="text-info">' +
 				lat +
 		'</p>' +
-		'<button id="btn-logout" class="btn btn-danger">Logout</button><br/>' +
+        '<button id="btn-create-place" class="btn btn-success" onclick="createPlace">Create place</button>' +
+		'<button id="btn-logout" class="btn btn-danger">Logout</button>' +
                 '<div class="k-content">' +
             '<div id="main-content">' +
                 '<div id="tabstrip">' +
