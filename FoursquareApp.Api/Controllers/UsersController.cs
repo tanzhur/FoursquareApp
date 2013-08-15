@@ -97,7 +97,9 @@ namespace FoursquareApp.Api.Controllers
             UserLoggedModel loggedUser = new UserLoggedModel()
             {
                 UserName = userToBeRegistered.Username,
-                SessionKey = GenerateSessionKey(userToBeRegistered.Id)
+                SessionKey = GenerateSessionKey(userToBeRegistered.Id),
+                Latitude = inputUser.Latitude,
+                Longitude = inputUser.Longitude
             };
 
             userToBeRegistered.SessionKey = loggedUser.SessionKey;
@@ -128,7 +130,9 @@ namespace FoursquareApp.Api.Controllers
             UserLoggedModel loggedUser = new UserLoggedModel()
             {
                 UserName = currentUser.Username,
-                SessionKey = GenerateSessionKey(currentUser.Id)
+                SessionKey = GenerateSessionKey(currentUser.Id),
+                Latitude = currentUser.Latitude,
+                Longitude = currentUser.Longitude
             };
 
             currentUser.SessionKey = loggedUser.SessionKey;
