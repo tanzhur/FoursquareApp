@@ -40,8 +40,10 @@
 		'<button id="btn-logout" class="btn btn-danger span1">Logout</button>' +
         '<button id="btn-create-place" class="btn btn-success span2">Create place</button>' +
         '</div>' +
+            
                 '<div class="k-content">' +
             '<div id="main-content">' +
+            '<div id="checkInMessageBox"></div>' +
                 '<div id="tabstrip">' +
                     '<ul>' +
                         '<li class="k-state-active">' +
