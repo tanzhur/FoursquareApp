@@ -7,8 +7,8 @@
 
 var controllers = (function () {
     //local check
-    //var baseUrl = "http://localhost:6514/api/";
-    var baseUrl = "http://foursquareapp.apphb.com/api/";
+    var baseUrl = "http://localhost:6514/api/";
+    //var baseUrl = "http://foursquareapp.apphb.com/api/";
 
     var Controller = Class.create({
         init: function () {
@@ -24,7 +24,7 @@ var controllers = (function () {
             this.attachUIEventHandlers(selector);
         },
         loadLoginFormUI: function (selector) {
-            var loginFormHtml = ui.loginForm()
+            var loginFormHtml = ui.loginForm();
             $(selector).html(loginFormHtml);
         },
         loadAppUI: function (selector) {
@@ -32,7 +32,7 @@ var controllers = (function () {
                 this.persister.nickname(),
                 this.persister.latitude(),
                 this.persister.longtitude()));
-            this.loadPlacesTabContent();
+            this.loadPlacesTabContent(selector);
             this.loadTabScript();
             this.loadCommentsTabContent();
         },
@@ -50,10 +50,11 @@ var controllers = (function () {
         },
 
         uploadImages: function () {
-            //alert("Working");
+            alert("Working");
         },
 
-        loadCommentsTabContent: function () {
+
+        loadCommentsTabContent: function (selector) {
 
             self = this;
 
@@ -94,12 +95,42 @@ var controllers = (function () {
                     ]
                 });
             });
+
+            
+
         },
 
-        loadPlacesTabContent: function () {
+        loadPlacesTabContent: function (selector) {
             self = this;
 
-           
+            console.log(selector);
+            console.log(ui.buildPlaceAdd());
+
+            $(selector).append(ui.buildPlaceAdd());
+            $('#add-form').hide();
+
+            $(document).ready(function () {
+
+
+                var window = $("#window"),
+                    undo = $("#btn-create-place");
+
+                undo.bind("click", function () {
+                    window.data("kendoWindow").open();
+                    undo.show();
+                });
+
+                if (!window.data("kendoWindow")) {
+                    window.kendoWindow({
+                        width: "500px",
+                        actions: ["Minimize", "Maximize", "Close"],
+                        title: "Add new place.",
+                        close: function () {
+                            undo.show();
+                        }
+                    });
+                }
+            });
 
             $(document).ready(function () {
                 $("#close").kendoGrid({

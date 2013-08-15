@@ -104,7 +104,7 @@ namespace FoursquareApp.Api.Controllers
         {
             ICollection<PlaceModel> allPlaceModels = new List<PlaceModel>();
 
-            var allPlaces = placesRepo.All();
+            var allPlaces = placesRepo.All().ToList();
 
             foreach (Place currentPlace in allPlaces)
             {
