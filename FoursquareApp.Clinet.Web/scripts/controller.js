@@ -30,8 +30,9 @@ var controllers = (function () {
                 this.persister.nickname(),
                 this.persister.latitude(),
                 this.persister.longtitude()));
-            this.loadTabScript();
             this.loadPlacesTabContent();
+            this.loadTabScript();
+            this.loadCommentsTabContent();
         },
 
         loadTabScript: function () {
@@ -48,6 +49,49 @@ var controllers = (function () {
 
         uploadImages: function () {
     
+        },
+
+        loadCommentsTabContent: function () {
+
+            self = this;
+
+            $(document).ready(function () {
+                $("#all-comments").kendoGrid({
+                    dataSource: {
+                        transport: {
+                            read: {
+                                url: self.persister.comment.getAllSerciceUrl(),
+                                dataType: "json"
+                            }
+                        },
+                        pageSize: 10,
+                    },
+
+                    selectable: "single cell",
+                    navigatable: true,
+                    filterable: true,
+                    sortable: true,
+                    pageable: true,
+                    columns: [{
+                        field: "Place",
+                        width: 200,
+                        title: "Place"
+                    }, {
+                        field: "Content",
+                        width: 200,
+                        title: "Comment"
+                    }, {
+                        field: "CreationDate",
+                        title: "Creation Date",
+                        format: "{0:dd/MM/yyyy}"
+                    }, {
+                        field: "User",
+                        width: 200,
+                        title: "User"
+                    }
+                    ]
+                });
+            });
         },
 
         loadPlacesTabContent: function () {
@@ -74,7 +118,7 @@ var controllers = (function () {
                         width: 120,
                         title: "Id"
                     }, {
-                        field: "PlaceName",
+                        field: "Name",
                         width: 120,
                         title: "Place Name"
                     }, {
@@ -122,7 +166,7 @@ var controllers = (function () {
                             width: 120,
                             title: "Id"
                         }, {
-                            field: "PlaceName",
+                            field: "Name",
                             width: 120,
                             title: "Place Name"
                         }, {
@@ -166,7 +210,7 @@ var controllers = (function () {
                             width: 120,
                             title: "Id"
                         }, {
-                            field: "PlaceName",
+                            field: "Name",
                             width: 120,
                             title: "Place Name"
                         }, {

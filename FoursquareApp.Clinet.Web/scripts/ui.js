@@ -36,20 +36,23 @@
         '<p class="text-info">' +
 				lat +
 		'</p>' +
-		'<button id="btn-logout" class="btn btn-danger">Logout</button><br/>' + 
-                '<div class="k-content">'+
-            '<div id="main-content">'+
-                '<div id="tabstrip">'+
-                    '<ul>'+
-                        '<li class="k-state-active">'+
-                            'Posts'+
-                        '</li>'+
-                        '<li>'+
-                            'Closest locations'+
-                        '</li>'+
-                    '</ul>'+
-                    '<div>'+
-                        '<div class="places">'+
+		'<button id="btn-logout" class="btn btn-danger">Logout</button><br/>' +
+                '<div class="k-content">' +
+            '<div id="main-content">' +
+                '<div id="tabstrip">' +
+                    '<ul>' +
+                        '<li class="k-state-active">' +
+                            'Comments' +
+                        '</li>' +
+                        '<li>' +
+                            'Places' +
+                        '</li>' +
+                    '</ul>' +
+                    '<div>' +
+                        '<div class="comments">' +
+                            '<h3 class="text-info">All comments</h3>' +
+                            '<div id="all-comments">' +
+                            '</div>' +
                         '</div>'+
                     '</div>'+
                     '<div>'+

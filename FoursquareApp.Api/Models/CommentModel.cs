@@ -48,6 +48,7 @@ namespace FoursquareApp.Api.Models
     {
         [DataMember]
         public string Content { get; set; }
+
         [DataMember]
         public int PlaceId { get; set; }
     }
