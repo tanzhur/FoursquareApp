@@ -65,11 +65,15 @@
     <Content Include="scripts\libs\class.js" />
     <Content Include="scripts\libs\jquery-2.0.3.js" />
     <Content Include="scripts\libs\jquery-2.0.3.min.js" />
+    <Content Include="scripts\libs\kendo.grid.min.js" />
+    <Content Include="scripts\libs\kendo.web.min.js" />
     <Content Include="scripts\persister.js" />
-    <Content Include="styles\bootstrap-responsive.css" />
-    <Content Include="styles\bootstrap-responsive.min.css" />
-    <Content Include="styles\bootstrap.css" />
-    <Content Include="styles\bootstrap.min.css" />
+    <Content Include="styles\bootstrap\bootstrap-responsive.css" />
+    <Content Include="styles\bootstrap\bootstrap-responsive.min.css" />
+    <Content Include="styles\bootstrap\bootstrap.css" />
+    <Content Include="styles\bootstrap\bootstrap.min.css" />
+    <Content Include="styles\kendo\kendo.common.min.css" />
+    <Content Include="styles\kendo\kendo.default.min.css" />
     <Content Include="styles\main-style.css" />
     <Content Include="Web.config" />
   </ItemGroup>
