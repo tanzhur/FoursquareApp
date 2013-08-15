@@ -27,7 +27,41 @@ var controllers = (function () {
         },
         loadAppUI: function (selector) {
             $(selector).html(ui.appUI(this.persister.nickname()));
+            this.loadTabScript();
+            this.showClosest();
         },
+
+        loadTabScript: function () {
+            $(document).ready(function () {
+                $("#tabstrip").kendoTabStrip({
+                    animation: {
+                        open: {
+                            effects: "fadeIn"
+                        }
+                    }
+                });
+            });
+        },
+
+        showClosest: function () {
+            self = this;
+            $(document).ready(function () {
+                    $("#all").kendoGrid({
+                        dataSource: {
+                            transport: {
+                                read: {
+                                    url: self.persister.place.getClosestService(),
+                                    dataType: "json"
+                                }
+                            },
+                            pageSize: 10,
+                        },
+                }, function () {
+
+                });
+            });
+        },
+
         attachUIEventHandlers: function (selector) {
             var wrapper = $(selector);
             var self = this;

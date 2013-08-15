@@ -27,10 +27,34 @@
     }
 
     function buildAppUI(nickname) {
-        var html = '<span id="user-nickname">' +
+        var html = '<p class="text-info">' +
 				nickname +
-		'</span>' +
-		'<button id="btn-logout" class="btn btn-danger">Logout</button><br/>';
+		'</p>' +
+		'<button id="btn-logout" class="btn btn-danger">Logout</button><br/>' + 
+                '<div class="k-content">'+
+            '<div id="main-content">'+
+                '<div id="tabstrip">'+
+                    '<ul>'+
+                        '<li class="k-state-active">'+
+                            'Posts'+
+                        '</li>'+
+                        '<li>'+
+                            'Closest locations'+
+                        '</li>'+
+                    '</ul>'+
+                    '<div>'+
+                        '<div class="places">'+
+                        '</div>'+
+                    '</div>'+
+                    '<div>'+
+                        '<div class="comments">' +
+                            '<div id="all">' +
+                            '</div>' +
+                        '</div>'+
+                    '</div>'+
+                '</div>'+
+            '</div>'+
+        '</div>';
         return html;
     }
 

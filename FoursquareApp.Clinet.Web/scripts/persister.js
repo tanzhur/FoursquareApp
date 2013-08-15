@@ -97,7 +97,10 @@ var persisters = (function () {
             var url = this.rootUrl + "get-closest/" + sessionKey;
             httpRequester.getJson(url, success, error);
         },
-
+        getClosestService: function (success, error) {
+            var url = this.rootUrl + "get-closest/" + sessionKey;
+            return url;
+        },
         getAll: function (success, error) {
             var url = this.rootUrl + "get-all/";
             httpRequester.getJson(url, sucess, error);
@@ -121,6 +124,11 @@ var persisters = (function () {
         getAll: function (success, error) {
             var url = this.rootUrl + "get-all/"
             httpRequester.getJson(url, success, error);
+        },
+
+        getAllSerciceUrl: function () {
+            var url = this.rootUrl + "get-all/";
+            return url;
         }
     });
 
