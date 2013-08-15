@@ -29,24 +29,19 @@ namespace FoursquareApp.Client
 
         public void AuthorizeAppOAuth(DropboxServiceProvider dropboxServiceProvider, string OAuthTokenFileName)
         {
-           //  Authorization without callback url
-            Console.Write("Getting request token...");
+          
             OAuthToken oauthToken = dropboxServiceProvider.OAuthOperations.FetchRequestToken(null, null);
-            Console.WriteLine("Done.");
 
-            OAuth1Parameters parameters = new OAuth1Parameters();
+           OAuth1Parameters parameters = new OAuth1Parameters();
             string authenticateUrl = dropboxServiceProvider.OAuthOperations.BuildAuthorizeUrl(
                 oauthToken.Value, parameters);
-            Console.WriteLine("Redirect the user for authorization to {0}", authenticateUrl);
-            Process.Start(authenticateUrl);
-            Console.Write("Press [Enter] when authorization attempt has succeeded.");
-            Console.ReadLine();
-
-            Console.Write("Getting access token...");
+       
+            //Process.Start(authenticateUrl);
+         
+         
             AuthorizedRequestToken requestToken = new AuthorizedRequestToken(oauthToken, null);
             OAuthToken oauthAccessToken =
                 dropboxServiceProvider.OAuthOperations.ExchangeForAccessToken(requestToken, null);
-            Console.WriteLine("Done.");
 
             string[] oauthData = new string[]
             {
