@@ -23,7 +23,7 @@ namespace FoursquareApp.Api.Models
         public string SessionKey { get; set; }
 
         [DataMember]
-        public List<PlaceModel> Places { get; set; }
+        public List<String> Places { get; set; }
 
         public UserModel(User user)
         {
@@ -31,11 +31,12 @@ namespace FoursquareApp.Api.Models
             this.Username = user.Username;
             this.Password = user.Password;
             this.SessionKey = user.SessionKey;
+            this.Places = new List<string>();
 
-            //foreach (Place currentPlace in user.Places)
-            //{
-            //    this.Places.Add(currentPlace.Name);
-            //}
+            foreach (Place currentPlace in user.Places)
+            {
+                this.Places.Add(currentPlace.Name);
+            }
         }
     }
 
