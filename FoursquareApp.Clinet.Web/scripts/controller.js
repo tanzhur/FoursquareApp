@@ -48,7 +48,8 @@ var controllers = (function () {
                 channel: "userplaces-channel",
                 callback: function (message) {
                     // Received a message --> print it in the page
-                    $("#pub-nub").innerHTML += message.User.Username + " has checked in " + message.Place.Name + " !" + '\n';
+                    $("#pn-messages ul").append('<li>' + message.User.Username + " has checked in " + message.Place.Name + " !</li>")
+                    //document.getElementById('pub-nub').innerHTML += message.User.Username + " has checked in " + message.Place.Name + " !" + '\n';
                 }
             });
         },
