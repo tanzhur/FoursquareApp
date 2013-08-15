@@ -31,7 +31,7 @@ var controllers = (function () {
                 this.persister.latitude(),
                 this.persister.longtitude()));
             this.loadTabScript();
-            this.showClosest();
+            this.loadPlacesTabContent();
         },
 
         loadTabScript: function () {
@@ -46,10 +46,10 @@ var controllers = (function () {
             });
         },
 
-        showClosest: function () {
+        loadPlacesTabContent: function () {
             self = this;
             $(document).ready(function () {
-                $("#all").kendoGrid({
+                $("#close").kendoGrid({
                     dataSource: {
                         transport: {
                             read: {
@@ -59,8 +59,126 @@ var controllers = (function () {
                         },
                         pageSize: 10,
                     },
-                }, function () {
 
+                    selectable: "single cell",
+                    navigatable: true,
+                    filterable: true,
+                    sortable: true,
+                    pageable: true,
+                    columns: [{
+                        field: "Id",
+                        width: 120,
+                        title: "Id"
+                    }, {
+                        field: "PlaceName",
+                        width: 120,
+                        title: "Place Name"
+                    }, {
+                        field: "Longitude",
+                        width: 120,
+                        title: "Longitude"
+                    }, {
+                        field: "Latitude",
+                        width: 120,
+                        title: "Latitude"
+                    }, {
+                        field: "Images",
+                        width: 120,
+                        title: "Images"
+                    }, {
+                        field: "CheckIn",
+                        width: 120,
+                        title: "Check In"
+                    },
+                    ]
+                });
+
+                $(document).ready(function () {
+                    $("#all").kendoGrid({
+                        dataSource: {
+                            transport: {
+                                read: {
+                                    url: self.persister.place.getAllService(),
+                                    dataType: "json"
+                                }
+                            },
+                            pageSize: 5,
+                        },
+
+                        selectable: "single cell",
+                        navigatable: true,
+                        filterable: true,
+                        sortable: true,
+                        pageable: true,
+                        columns: [{
+                            field: "Id",
+                            width: 120,
+                            title: "Id"
+                        }, {
+                            field: "PlaceName",
+                            width: 120,
+                            title: "Place Name"
+                        }, {
+                            field: "Longitude",
+                            width: 120,
+                            title: "Longitude"
+                        }, {
+                            field: "Latitude",
+                            width: 120,
+                            title: "Latitude"
+                        }, {
+                            field: "Images",
+                            width: 120,
+                            title: "Images"
+                        },
+                        ]
+                    }, function () {
+
+                    });
+                });
+
+                $(document).ready(function () {
+                    $("#my").kendoGrid({
+                        dataSource: {
+                            transport: {
+                                read: {
+                                    url: self.persister.place.getCurrentService(),
+                                    dataType: "json"
+                                }
+                            },
+                            pageSize: 10,
+                        },
+
+                        selectable: "single cell",
+                        navigatable: true,
+                        filterable: true,
+                        sortable: true,
+                        pageable: true,
+                        columns: [{
+                            field: "Id",
+                            width: 120,
+                            title: "Id"
+                        }, {
+                            field: "PlaceName",
+                            width: 120,
+                            title: "Place Name"
+                        }, {
+                            field: "Longitude",
+                            width: 120,
+                            title: "Longitude"
+                        }, {
+                            field: "Latitude",
+                            width: 120,
+                            title: "Latitude"
+                        }, {
+                            field: "Images",
+                            width: 120,
+                            title: "Images"
+                        },
+                        ]
+                    }, function () {
+
+                    });
                 });
             });
         },

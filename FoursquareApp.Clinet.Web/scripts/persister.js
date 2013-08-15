@@ -114,20 +114,35 @@ var persisters = (function () {
             httpRequester.postJson(url, data, sucess, error);
         },
 
+        getCurrent: function (sucess, error) {
+            var url = this.rootUrl + "get-current/" + sessionKey;
+            httpRequester.getJson(url, sucess, error);
+        },
+
+        getCurrentService: function () {
+            return url = this.rootUrl + "get-current/" + sessionKey;
+        }, 
+
         getClosest: function (success, error) {
             var url = this.rootUrl + "get-closest/" + sessionKey;
             httpRequester.getJson(url, success, error);
         },
+
         getClosestService: function (success, error) {
             var url = this.rootUrl + "get-closest/" + sessionKey;
             return url;
         },
+
         getAll: function (success, error) {
             var url = this.rootUrl + "get-all/";
             httpRequester.getJson(url, sucess, error);
         },
 
-        getAll: function (success, error) {
+        getAllService: function () {
+            return url = this.rootUrl + "get-all/";
+        },
+
+        getCurrent: function (success, error) {
             var url = this.rootUrl + "get-current/" + sessionKey;
             httpRequester.getJson(url, sucess, error);
         }

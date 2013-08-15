@@ -53,8 +53,15 @@
                         '</div>'+
                     '</div>'+
                     '<div>'+
-                        '<div class="comments">' +
+                        '<div class="places">' +
+                            '<h3 class="text-info">Closest Places</h3>' +
+                            '<div id="close">' +
+                            '</div>' +
+                            '<h3 class="text-info">All Places</h3>' +
                             '<div id="all">' +
+                            '</div>' +
+                            '<h3 class="text-info">My Places</h3>' +
+                            '<div id="my">' +
                             '</div>' +
                         '</div>'+
                     '</div>'+
