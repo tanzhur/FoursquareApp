@@ -3,6 +3,7 @@
 /// <reference path="persister.js" />
 /// <reference path="libs/kendo.grid.min.js" />
 /// <reference path="libs/jquery-2.0.3.intellisense.js" />
+/// <reference path="libs/kendo.web.min.js" />
 /// <reference path="ui.js" />
 
 var controllers = (function () {
@@ -260,9 +261,35 @@ var controllers = (function () {
                             width: 120,
                             title: "Latitude"
                         }, {
-                            field: "Images",
                             width: 120,
-                            title: "Images"
+                            title: "View All Images",
+                            command: {
+                                text: "View All",
+                                click: function (e) {
+
+                                }
+                            }
+                        }, {
+                            width: 120,
+                            title: "Upload Image",
+                            command: {
+                                text: "Upload",
+                                click: function (e) {
+                                    var currentPlace = this.dataItem($(e.currentTarget).closest("tr"));
+
+                                    var wnd = $("#upload-box")
+                                        .kendoWindow({
+                                            title: "Information",
+                                            modal: true,
+                                            visible: false,
+                                            resizable: false,
+                                            width: 300
+                                        }).data("kendoWindow");
+
+                                    wnd.content(ui.buildUpload() + '<div id="hidden-data" data-place-id="' + currentPlace.Id + '"></div>');
+                                    wnd.center().open();
+                                }
+                            }
                         }, {
                             title: "Comment It",
                             command: {
@@ -271,8 +298,7 @@ var controllers = (function () {
                                     e.preventDefault();
 
                                     var currentPlace = this.dataItem($(e.currentTarget).closest("tr"));
-                                    
-                                 
+                                                           
                                     var wnd = $("#checkInMessageBox")
                                         .kendoWindow({
                                             title: "Information",

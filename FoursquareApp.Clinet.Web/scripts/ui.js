@@ -41,7 +41,8 @@
                 '<div class="k-content">' +
             '<div id="main-content">' +
             '<div id="checkInMessageBox"></div>' +
-            '<div id="commentsInputBox"></div>'+
+            '<div id="commentsInputBox"></div>' +
+            '<div id="upload-box"></div>' +
                 '<div id="tabstrip">' +
                     '<ul>' +
                         '<li class="k-state-active">' +
@@ -114,13 +115,22 @@
         return html;
     }
 
+    function buildUploadForm() {
+        var html = "";
+        html += '<h4>Upload image</h4>' +
+                '<textarea id="link-url"></textarea>' +
+                '<button id="submit-url" class="btn btn-success">Upload image</button>';
+
+        return html;
+    }
+
     return {
         appUI: buildAppUI,
         loginForm: buildLoginForm,
         buildPlaceAdd: buildAddPlaceWindow,
         buildPubNub: buildPubNubUI,
-        buildInsertCommentUI: buildCommentInput
-
+        buildInsertCommentUI: buildCommentInput,
+        buildUpload: buildUploadForm
     }
 
 }());
