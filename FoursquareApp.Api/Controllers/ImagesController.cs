@@ -60,15 +60,16 @@ namespace FoursquareApp.Api.Controllers
         public HttpResponseMessage GetAllPictures([FromBody]int? PlaceId)
         {
             ICollection<string> allPicturesLinks = new List<string>();
-
             Place currentPlace = placesRepo.All().Where(p => p.Id == PlaceId).FirstOrDefault();
 
+            var allImages = imagesRepo.All().Where(i => i.PlaceId == PlaceId).ToList();
+            var imgs = imagesRepo.All().ToList();
             if (currentPlace == null)
             {
                 return this.Request.CreateErrorResponse(HttpStatusCode.NotFound, "Place not found");
             }
 
-            foreach (Image currentImage in currentPlace.Images)
+            foreach (Image currentImage in allImages)
             {
                 allPicturesLinks.Add(currentImage.Url);
             }

@@ -266,7 +266,31 @@ var controllers = (function () {
                             command: {
                                 text: "View All",
                                 click: function (e) {
+                                    
 
+                                    var currentPlace = this.dataItem($(e.currentTarget).closest("tr"));
+                                    var placeId = currentPlace.Id;
+                                    var html = "";
+                                    self.persister.image.getAll(placeId, function (data) {
+                                        var wnd = $("#gallery-box")
+                                     .kendoWindow({
+                                         title: "Information",
+                                         modal: true,
+                                         visible: false,
+                                         resizable: false,
+                                         width: 300
+                                     }).data("kendoWindow");
+
+
+                                        for (var i = 0; i < data.length; i++) {
+                                            html += '<img src="'+ data[i] +'" width=200 height=200 alt="Image'+ i +'"/>'
+                                        }
+                                        wnd.content(html);
+                                        wnd.open();
+                                    console.log(data);
+                                    }, function () { alert('not working'); });
+
+                                
                                 }
                             }
                         }, {
@@ -368,7 +392,7 @@ var controllers = (function () {
         attachUIEventHandlers: function (selector) {
             var wrapper = $(selector);
             var self = this;
-
+          
             $("body").on("click", "#submit-url", function () {
                 var imageName = $("#image-name").val();
                 var imageUrl = $("#link-url").val();

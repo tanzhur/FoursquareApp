@@ -43,6 +43,7 @@
             '<div id="checkInMessageBox"></div>' +
             '<div id="commentsInputBox"></div>' +
             '<div id="upload-box"></div>' +
+            '<div id="gallery-box"></div>' +
                 '<div id="tabstrip">' +
                     '<ul>' +
                         '<li class="k-state-active">' +
