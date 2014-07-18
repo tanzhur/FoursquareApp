@@ -1,4 +1,4 @@
-FoursquareApp
+Foursquare App
 =============
 
-Simple app for Web-Services Course
+Simple Foursquare-like App for the Web Services course in Telerik Academy
